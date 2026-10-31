@@ -1,0 +1,2541 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madi 🐻🐻‍❄️ Work Tracker</title>
+<meta name="application-name" content="Madi Work Tracker">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Madi 🐻 Work">
+<meta name="theme-color" content="#0a0f1e">
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Madi%20Work%20Tracker%22%2C%22short_name%22%3A%22Madi%20Work%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0f1e%22%2C%22theme_color%22%3A%22%230a0f1e%22%7D">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+:root{
+  --bg:#0a0f1e;--surface:#111827;--card:#1a2235;--card2:#1e2a40;
+  --border:#2a3a55;--accent:#3b82f6;--accent2:#60a5fa;--accent3:#1d4ed8;
+  --green:#10b981;--green2:#34d399;--red:#ef4444;--yellow:#f59e0b;
+  --purple:#7c3aed;--text:#f0f6ff;--muted:#8ba3c7;--muted2:#4a6080;
+  --glow:0 0 24px rgba(59,130,246,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;
+  background-image:radial-gradient(ellipse at 20% 10%,rgba(59,130,246,0.12) 0%,transparent 50%),
+  radial-gradient(ellipse at 80% 80%,rgba(16,185,129,0.07) 0%,transparent 50%);}
+
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,#0d1526,#111c35);border-bottom:1px solid var(--border);
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);gap:12px;flex-wrap:wrap;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--accent3),var(--accent));
+  display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:var(--glow);}
+.logo h1{font-size:1rem;font-weight:700;}
+.logo p{font-size:0.65rem;color:var(--muted);}
+.header-right{display:flex;align-items:center;gap:16px;}
+.header-stats{display:flex;gap:16px;}
+.hstat{text-align:center;}
+.hstat .val{font-size:1.1rem;font-weight:700;color:var(--accent2);}
+.hstat .lbl{font-size:0.6rem;color:var(--muted);}
+
+/* ── TABS ── */
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 24px;overflow-x:auto;gap:2px;}
+.tab-btn{padding:11px 18px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:600;
+  color:var(--muted);background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+.tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent);}
+.tab-btn:hover:not(.active){color:var(--text);}
+main{padding:20px;max-width:1100px;margin:0 auto;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:18px;}
+.card-title{font-size:0.92rem;font-weight:700;color:var(--accent2);margin-bottom:16px;
+  display:flex;align-items:center;gap:7px;}
+
+/* ── GRIDS ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+/* ── FORM ── */
+label{display:block;font-size:0.78rem;color:var(--muted);margin-bottom:4px;font-weight:600;}
+input[type=date],input[type=number],input[type=time],input[type=text],select{
+  width:100%;padding:10px 13px;background:var(--bg);border:1px solid var(--border);
+  border-radius:11px;color:var(--text);font-family:'Cairo',sans-serif;font-size:0.86rem;
+  transition:border-color 0.2s,box-shadow 0.2s;outline:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.15);}
+
+/* ── BUTTONS ── */
+.btn{padding:10px 20px;border-radius:11px;border:none;font-family:'Cairo',sans-serif;
+  font-size:0.86rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+  display:inline-flex;align-items:center;gap:6px;}
+.btn-primary{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;box-shadow:var(--glow);}
+.btn-primary:hover{transform:translateY(-1px);}
+.btn-success{background:linear-gradient(135deg,#065f46,var(--green));color:#fff;}
+.btn-warning{background:linear-gradient(135deg,#92400e,var(--yellow));color:#fff;}
+.btn-danger{background:linear-gradient(135deg,#7f1d1d,var(--red));color:#fff;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent2);}
+.btn-sm{padding:6px 12px;font-size:0.76rem;border-radius:8px;}
+
+/* ── STAT BOXES ── */
+.sbox{background:var(--card2);border:1px solid var(--border);border-radius:14px;
+  padding:16px;text-align:center;}
+.sbox .val{font-size:1.5rem;font-weight:900;}
+.sbox .lbl{font-size:0.72rem;color:var(--muted);margin-top:3px;}
+.sbox.blue .val{color:var(--accent2);}
+.sbox.green .val{color:var(--green2);}
+.sbox.yellow .val{color:var(--yellow);}
+.sbox.red .val{color:#fca5a5;}
+
+/* ── PAY SUMMARY STRIP ── */
+.pay-strip{display:flex;gap:0;border-radius:14px;overflow:hidden;
+  border:1px solid var(--border);margin-top:16px;}
+.pay-strip-item{flex:1;padding:14px 10px;text-align:center;position:relative;}
+.pay-strip-item+.pay-strip-item{border-right:1px solid var(--border);}
+.pay-strip-item .ps-val{font-size:1.3rem;font-weight:900;}
+.pay-strip-item .ps-lbl{font-size:0.68rem;color:var(--muted);margin-top:3px;}
+.ps-total{background:rgba(59,130,246,0.08);}
+.ps-total .ps-val{color:var(--accent2);}
+.ps-paid{background:rgba(16,185,129,0.08);}
+.ps-paid .ps-val{color:var(--green2);}
+.ps-remaining{background:rgba(245,158,11,0.08);}
+.ps-remaining .ps-val{color:var(--yellow);}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:0.68rem;font-weight:700;}
+.bw{background:rgba(59,130,246,0.2);color:var(--accent2);}
+.bs{background:rgba(168,85,247,0.2);color:#c4b5fd;}
+.bv{background:rgba(245,158,11,0.2);color:var(--yellow);}
+.bh{background:rgba(239,68,68,0.2);color:#fca5a5;}
+.bwk{background:rgba(100,116,139,0.2);color:#94a3b8;}
+
+/* ── TABLE ── */
+.table-wrap{overflow-x:auto;border-radius:11px;}
+table{width:100%;border-collapse:collapse;}
+thead th{background:var(--bg);padding:10px 13px;font-size:0.72rem;color:var(--muted);
+  font-weight:700;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(42,58,85,0.4);transition:background 0.15s;}
+tbody tr:hover{background:rgba(59,130,246,0.04);}
+tbody td{padding:10px 13px;font-size:0.82rem;text-align:right;vertical-align:middle;}
+tr.row-paid td{background:rgba(16,185,129,0.04);}
+
+/* ── PAY BTN in table ── */
+.paybtn{padding:6px 14px;border-radius:18px;border:none;cursor:pointer;
+  font-family:'Cairo',sans-serif;font-size:0.76rem;font-weight:700;
+  transition:all 0.2s;white-space:nowrap;}
+.paybtn.paid{background:linear-gradient(135deg,#065f46,#10b981);color:#fff;
+  box-shadow:0 0 10px rgba(16,185,129,0.3);}
+.paybtn.unpaid{background:linear-gradient(135deg,#78350f,#f59e0b);color:#fff;
+  box-shadow:0 0 8px rgba(245,158,11,0.2);}
+.paybtn:hover{transform:scale(1.04);}
+
+/* ── PRINT / SAVE-AS-IMAGE VIEW ── */
+.view-mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.shift-switch{display:inline-flex;background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:4px;gap:4px;}
+.shift-switch button{border:none;background:transparent;padding:8px 22px;border-radius:999px;font-size:1.3rem;
+  cursor:pointer;transition:.2s;line-height:1;opacity:0.45;filter:grayscale(1);}
+.shift-switch button.active{background:var(--accent);opacity:1;filter:none;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.alanizi-title{text-align:center;font-weight:800;font-size:0.95rem;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--accent2),var(--green2));-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;}
+.hide-actions .action-col{display:none!important;}
+.table-total-footer{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px;
+  margin-top:14px;padding-top:14px;border-top:2px solid var(--border);font-weight:800;font-size:0.92rem;}
+.table-total-footer .ttf-item{text-align:center;}
+.table-total-footer .ttf-lbl{font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:2px;}
+.bulk-pay-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:16px;}
+.bulk-pay-card select{padding:8px 10px;}
+.sel-col{width:32px;text-align:center;display:none;}
+#daysTableWrap.selecting .sel-col{display:table-cell;}
+tr.row-selected{outline:2px solid var(--accent2);outline-offset:-2px;}
+#printCapture{background:var(--bg);padding:18px 16px;border-radius:14px;}
+.print-row{display:flex;gap:18px;margin-bottom:18px;}
+.print-row:last-child{margin-bottom:0;}
+.print-col{flex:1;min-width:0;background:var(--card2);border:1px solid var(--border);
+  border-radius:12px;padding:10px 12px;}
+.print-grid-head{display:grid;grid-template-columns:1fr auto;gap:6px 10px;
+  font-size:0.68rem;color:var(--muted);font-weight:700;padding-bottom:6px;
+  border-bottom:1px solid var(--border);margin-bottom:4px;}
+.print-grid-head div:last-child{text-align:left;}
+.print-grid{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 10px;}
+.print-cell{padding:6px 0;border-bottom:1px solid rgba(42,58,85,0.4);}
+.print-day{font-size:0.78rem;font-weight:700;color:var(--text);}
+.print-date{font-size:0.66rem;color:var(--muted);margin-top:1px;}
+.print-hrs{padding:6px 0;border-bottom:1px solid rgba(42,58,85,0.4);
+  font-size:0.86rem;font-weight:800;color:var(--accent2);text-align:left;}
+.print-col-total{display:flex;justify-content:space-between;align-items:center;
+  padding-top:8px;margin-top:2px;border-top:1px solid var(--border);
+  font-size:0.78rem;font-weight:700;}
+.print-col-total span:last-child{color:var(--green2);font-size:0.92rem;font-weight:900;}
+@media (max-width:420px){
+  .print-row{gap:8px;}
+  .print-col{padding:8px 6px;}
+  .print-day{font-size:0.72rem;}
+  .print-date{font-size:0.6rem;}
+  .print-hrs{font-size:0.78rem;}
+}
+
+/* ── DAYS TAB ── */
+.days-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-btn{padding:7px 16px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'Cairo',sans-serif;
+  font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.filter-btn.active{background:var(--accent3);border-color:var(--accent);color:#fff;}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:16px;}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:24px;max-width:460px;width:100%;direction:rtl;max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:0.95rem;font-weight:700;color:var(--accent2);margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1.2rem;font-family:'Cairo',sans-serif;}
+.modal-close:hover{color:var(--text);}
+
+/* ── MISC ── */
+.sep{height:1px;background:var(--border);margin:16px 0;}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);}
+.empty .icon{font-size:2.6rem;margin-bottom:10px;}
+.empty p{font-size:0.86rem;}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--green);color:#fff;padding:10px 24px;border-radius:40px;
+  font-size:0.83rem;font-weight:700;opacity:0;transition:all 0.3s;z-index:999;pointer-events:none;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.setting-row{display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid rgba(42,58,85,0.5);}
+.setting-row:last-child{border-bottom:none;}
+.stitle{font-weight:600;font-size:0.86rem;}
+.sdesc{font-size:0.74rem;color:var(--muted);margin-top:2px;}
+.toggle{position:relative;width:42px;height:22px;}
+.toggle input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;inset:0;background:var(--muted2);border-radius:22px;transition:0.3s;}
+.slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;
+  background:#fff;border-radius:50%;transition:0.3s;}
+input:checked+.slider{background:var(--accent);}
+input:checked+.slider:before{transform:translateX(20px);}
+.hol-list{list-style:none;}
+.hol-list li{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 12px;margin-bottom:4px;background:var(--bg);border-radius:9px;
+  border:1px solid var(--border);font-size:0.8rem;}
+.hol-list .del-btn{background:rgba(239,68,68,0.15);color:#fca5a5;border:none;
+  border-radius:6px;padding:2px 9px;cursor:pointer;font-size:0.72rem;font-family:'Cairo',sans-serif;}
+.month-nav{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.month-nav select{width:auto;flex:1;}
+.btn-install{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:0.78rem;
+  padding:7px 14px;border-radius:9px;border:none;cursor:pointer;font-family:'Cairo',sans-serif;
+  font-weight:700;transition:all 0.2s;white-space:nowrap;}
+.btn-lang{background:var(--card2);color:var(--accent2);font-size:0.78rem;
+  padding:7px 14px;border-radius:9px;border:1px solid var(--border);cursor:pointer;
+  font-family:'Cairo',sans-serif;font-weight:700;transition:all 0.2s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;}
+.btn-lang:hover{border-color:var(--accent);color:#fff;}
+@keyframes pulse{0%,100%{box-shadow:0 0 14px rgba(124,58,237,0.35);}
+  50%{box-shadow:0 0 26px rgba(124,58,237,0.7);}}
+@keyframes bounceDown{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+/* salary hidden */
+.salary-hidden .salary-val{filter:blur(6px);user-select:none;transition:filter 0.3s;}
+.salary-hidden .ps-val{filter:blur(6px);user-select:none;transition:filter 0.3s;}
+@media(max-width:640px){
+  header{padding:10px 12px;}.header-stats{gap:10px;}
+  main{padding:12px;}.grid2{grid-template-columns:1fr;}
+  .grid3{grid-template-columns:1fr 1fr;}.tabs{padding:0 12px;}
+  .tab-btn{padding:10px 10px;font-size:0.78rem;}
+  .pay-strip{flex-direction:column;}
+  .pay-strip-item+.pay-strip-item{border-right:none;border-top:1px solid var(--border);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ ORIGINAL SVG MASCOTS ═══ -->
+<svg style="display:none;">
+<symbol id="bear-cola" viewBox="0 0 200 200">
+  <ellipse cx="100" cy="175" rx="55" ry="10" fill="#000" opacity="0.15"/>
+  <path d="M60 90 Q55 60 75 45 Q90 35 100 35 Q110 35 125 45 Q145 60 140 90 Q145 110 135 130 Q130 150 100 155 Q70 150 65 130 Q55 110 60 90 Z" fill="#d6a373" stroke="#3a2418" stroke-width="3"/>
+  <circle cx="58" cy="48" r="18" fill="#d6a373" stroke="#3a2418" stroke-width="3"/>
+  <circle cx="142" cy="48" r="18" fill="#d6a373" stroke="#3a2418" stroke-width="3"/>
+  <circle cx="58" cy="48" r="8" fill="#3a2418" opacity="0.3"/>
+  <circle cx="142" cy="48" r="8" fill="#3a2418" opacity="0.3"/>
+  <circle cx="128" cy="100" r="11" fill="#f5c89a" opacity="0.6"/>
+  <circle cx="118" cy="80" r="3" fill="#3a2418"/>
+  <rect x="60" y="78" width="55" height="14" rx="7" fill="#7a1f1f" stroke="#3a2418" stroke-width="2.5" transform="rotate(-18 87 85)"/>
+  <rect x="50" y="76" width="22" height="20" rx="4" fill="#fff" stroke="#3a2418" stroke-width="2" transform="rotate(-18 61 85)"/>
+  <text x="61" y="89" font-size="7" fill="#7a1f1f" font-weight="900" font-family="Arial" transform="rotate(-18 61 85)">cola</text>
+  <path d="M80 130 Q75 145 78 158" stroke="#3a2418" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M120 130 Q125 145 122 158" stroke="#3a2418" stroke-width="3" fill="none" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="bear-panda-nap" viewBox="0 0 220 140">
+  <ellipse cx="110" cy="125" rx="90" ry="10" fill="#000" opacity="0.12"/>
+  <!-- panda lying down -->
+  <ellipse cx="65" cy="95" rx="42" ry="30" fill="#fff" stroke="#3a2418" stroke-width="3"/>
+  <ellipse cx="35" cy="70" rx="13" ry="13" fill="#2a2a2a"/>
+  <ellipse cx="80" cy="65" rx="13" ry="13" fill="#2a2a2a"/>
+  <ellipse cx="40" cy="85" rx="9" ry="6" fill="#2a2a2a"/>
+  <circle cx="25" cy="88" r="6" fill="#ffc1cc" opacity="0.7"/>
+  <path d="M30 92 Q40 96 48 92" stroke="#3a2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- bear lying down behind -->
+  <ellipse cx="140" cy="85" rx="46" ry="32" fill="#d6a373" stroke="#3a2418" stroke-width="3"/>
+  <ellipse cx="115" cy="58" rx="11" ry="11" fill="#d6a373" stroke="#3a2418" stroke-width="2.5"/>
+  <ellipse cx="158" cy="55" rx="11" ry="11" fill="#d6a373" stroke="#3a2418" stroke-width="2.5"/>
+  <circle cx="150" cy="78" r="9" fill="#f5c89a" opacity="0.5"/>
+  <path d="M130 73 Q133 70 136 73" stroke="#3a2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M145 73 Q148 70 151 73" stroke="#3a2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M132 88 Q140 92 148 88" stroke="#3a2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- fan -->
+  <rect x="178" y="60" width="6" height="36" rx="2" fill="#9fd8e0" stroke="#3a2418" stroke-width="2"/>
+  <rect x="168" y="92" width="26" height="8" rx="3" fill="#9fd8e0" stroke="#3a2418" stroke-width="2"/>
+  <circle cx="181" cy="48" r="22" fill="#bce8ee" stroke="#3a2418" stroke-width="2.5"/>
+  <circle cx="181" cy="48" r="4" fill="#3a2418"/>
+  <path d="M181 48 L181 28 M181 48 L198 38 M181 48 L198 58 M181 48 L164 38 M181 48 L164 58" stroke="#3a2418" stroke-width="2"/>
+  <!-- curtain -->
+  <rect x="0" y="0" width="22" height="100" fill="#5a7fa0" opacity="0.6" rx="3"/>
+</symbol>
+
+<symbol id="panda-noodles" viewBox="0 0 160 160">
+  <ellipse cx="80" cy="150" rx="55" ry="8" fill="#000" opacity="0.12"/>
+  <!-- bowl -->
+  <path d="M40 110 Q40 140 80 142 Q120 140 120 110 Z" fill="#6b3a2a" stroke="#3a2418" stroke-width="3"/>
+  <ellipse cx="80" cy="108" rx="40" ry="10" fill="#f4d35e"/>
+  <ellipse cx="80" cy="108" rx="40" ry="10" fill="none" stroke="#3a2418" stroke-width="3"/>
+  <circle cx="100" cy="112" r="9" fill="#fff8e0" stroke="#3a2418" stroke-width="2"/>
+  <circle cx="100" cy="112" r="4" fill="#f4b942"/>
+  <!-- noodle strand flying up -->
+  <path d="M75 105 Q60 70 90 50 Q110 35 95 15" stroke="#f4d35e" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M75 105 Q60 70 90 50 Q110 35 95 15" stroke="#3a2418" stroke-width="9" fill="none" stroke-linecap="round" opacity="0" />
+  <!-- panda body -->
+  <ellipse cx="60" cy="70" rx="38" ry="34" fill="#fff" stroke="#3a2418" stroke-width="3"/>
+  <ellipse cx="34" cy="48" rx="13" ry="13" fill="#2a2a2a"/>
+  <ellipse cx="80" cy="42" rx="13" ry="13" fill="#2a2a2a"/>
+  <ellipse cx="40" cy="62" rx="10" ry="7" fill="#2a2a2a"/>
+  <ellipse cx="68" cy="58" rx="10" ry="7" fill="#2a2a2a"/>
+  <circle cx="30" cy="72" r="7" fill="#ffc1cc" opacity="0.7"/>
+  <circle cx="78" cy="68" r="3" fill="#3a2418"/>
+  <path d="M40 80 Q55 88 65 78" stroke="#3a2418" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- chopsticks -->
+  <rect x="58" y="35" width="4" height="55" rx="2" fill="#c9893a" stroke="#3a2418" stroke-width="1.5" transform="rotate(18 60 60)"/>
+  <rect x="50" y="35" width="4" height="55" rx="2" fill="#c9893a" stroke="#3a2418" stroke-width="1.5" transform="rotate(10 52 60)"/>
+  <!-- arm holding chopsticks -->
+  <ellipse cx="50" cy="85" rx="11" ry="8" fill="#fff" stroke="#3a2418" stroke-width="2.5" transform="rotate(-30 50 85)"/>
+</symbol>
+</svg>
+
+<header>
+  <div class="logo">
+    <svg width="40" height="40" style="flex-shrink:0;"><use href="#bear-cola"/></svg>
+    <div>
+      <h1>Madi 🐻🐻‍❄️ Work Tracker</h1>
+      <p data-i18n="subtitle">Arbeitszeitkonto – Deutschland</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-stats">
+      <div class="hstat"><div class="val" id="hDays">0</div><div class="lbl" data-i18n="days">أيام</div></div>
+      <div class="hstat"><div class="val" id="hHours">0</div><div class="lbl" data-i18n="hours">ساعات</div></div>
+      <div class="hstat"><div class="val" id="hSalary">0€</div><div class="lbl" data-i18n="salary">الراتب</div></div>
+    </div>
+    <button class="btn-lang" id="langBtn" onclick="toggleLang()">🌐 <span id="langBtnLabel">DE</span></button>
+    <button class="btn-install" id="installBtn" onclick="installApp()"><span data-i18n="install">📲 تثبيت</span> <span id="installArrow" style="display:inline-block;animation:bounceDown 1.2s infinite;">⬇️</span></button>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('entry',this)" data-i18n="tabEntry">📝 تسجيل</button>
+  <button class="tab-btn" onclick="switchTab('days',this)" data-i18n="tabDays">📅 أيام العمل</button>
+  <button class="tab-btn" onclick="switchTab('print',this)" data-i18n="tabPrint">🖼️ أيام عملي الشهري</button>
+  <button class="tab-btn" onclick="switchTab('report',this)" data-i18n="tabReport">📊 التقارير</button>
+  <button class="tab-btn" onclick="switchTab('commit',this)" data-i18n="tabCommit">📋 التزاماتي</button>
+  <button class="tab-btn" onclick="switchTab('company',this)" data-i18n="tabCompany">🏭 حسب الشركة</button>
+  <button class="tab-btn" onclick="switchTab('settings',this)" data-i18n="tabSettings">⚙️ الإعدادات</button>
+</div>
+
+<main>
+
+<!-- ══════ TAB 1: ENTRY ══════ -->
+<div class="tab-panel active" id="tab-entry">
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title"><span>📅</span> <span data-i18n="registerWorkDay">تسجيل يوم عمل</span></div>
+      <div style="margin-bottom:13px"><label data-i18n="date">التاريخ</label><input type="date" id="entryDate"></div>
+      <div style="margin-bottom:13px"><label data-i18n="entryCompanyLabel">اسم العمل / الشركة (اختياري)</label>
+        <select id="entryCompany"><option value="" data-i18n="withoutOption">— بدون —</option></select></div>
+      <div class="grid2" style="margin-bottom:13px">
+        <div><label data-i18n="entryExtraTaskLabel">🚚 عمل إضافي (اختياري)</label>
+          <select id="entryExtraTask" onchange="updateCalc()"><option value="" data-i18n="withoutOption">— بدون —</option></select></div>
+        <div><label data-i18n="qtyLabel">الكمية</label>
+          <input type="number" id="entryExtraQty" value="1" min="1" step="1" oninput="updateCalc()"></div>
+      </div>
+      <div style="margin-bottom:13px">
+        <label data-i18n="shiftSwitchLabel">نوع الدوام (اختياري)</label>
+        <div>
+          <input type="hidden" id="entryShiftType" value="">
+          <div class="shift-switch" id="entryShiftSwitch">
+            <button type="button" data-shift="day" onclick="applyShiftPreset('entry','day')">🌞</button>
+            <button type="button" data-shift="night" onclick="applyShiftPreset('entry','night')">🌙</button>
+          </div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-bottom:13px">
+        <div><label data-i18n="startTime">وقت البدء</label><input type="time" id="startTime" value="07:00"></div>
+        <div><label data-i18n="endTime">وقت الانتهاء</label><input type="time" id="endTime" value="16:00"></div>
+      </div>
+      <div style="margin-bottom:13px"><label data-i18n="breakMinutes">استراحة (دقيقة)</label>
+        <input type="number" id="breakMin" value="60" min="0" max="180"></div>
+      <div style="margin-bottom:13px">
+        <label data-i18n="dayType">نوع اليوم</label>
+        <select id="dayType">
+          <option value="work" data-i18n="typeWorkNormal">يوم عمل عادي</option>
+          <option value="sick" data-i18n="typeSick">إجازة مرضية</option>
+          <option value="vacation" data-i18n="typeVacation">إجازة سنوية</option>
+          <option value="holiday" data-i18n="typeHoliday">عطلة رسمية</option>
+          <option value="weekly" data-i18n="typeWeekly">عطلة أسبوعية</option>
+        </select>
+      </div>
+      <div style="margin-bottom:16px"><label data-i18n="noteOptional">ملاحظة (اختياري)</label>
+        <input type="text" id="entryNote" placeholder="مثلاً: اجتماع أو عمل إضافي" data-i18n-placeholder="notePlaceholder"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="saveEntry()"><span data-i18n="save">💾 حفظ</span></button>
+        <button class="btn btn-success" onclick="quickAddToday()"><span data-i18n="quickAddAuto">⚡ اليوم تلقائي</span></button>
+        <button class="btn btn-outline" onclick="fillToday()"><span data-i18n="todayBtn">📆 اليوم</span></button>
+        <button class="btn btn-outline" onclick="clearForm()"><span data-i18n="clear">✖ مسح</span></button>
+      </div>
+      <div id="entryFeedback" style="margin-top:11px;font-size:0.82rem;display:none;"></div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title"><span>💡</span> <span data-i18n="instantCalc">الحساب الفوري</span></div>
+        <div class="grid2">
+          <div class="sbox blue"><div class="val" id="calcHours">7.0</div><div class="lbl" data-i18n="hours">ساعات</div></div>
+          <div class="sbox green"><div class="val" id="calcPay">0.00€</div><div class="lbl" data-i18n="dayPay">أجر اليوم</div></div>
+        </div>
+        <div style="margin-top:13px;font-size:0.78rem;color:var(--muted);line-height:2;">
+          <div><span data-i18n="workingHoursLabel">⏰ دوام:</span> <strong style="color:var(--text)">07:00 – 16:00</strong></div>
+          <div><span data-i18n="breakLabel">☕ استراحة:</span> <strong style="color:var(--text)" id="calcBreak">60</strong> <span data-i18n="minutes">دقيقة</span></div>
+          <div><span data-i18n="hourlyRateLabel">💶 أجر الساعة:</span> <strong style="color:var(--accent2)" id="calcWageShow">–</strong></div>
+        </div>
+        <div id="nightShiftHint" style="margin-top:8px;font-size:0.76rem;color:var(--accent2);display:none;" data-i18n="nightShiftHint">🌙 الدوام يمتد لليوم التالي (يُحتسب تلقائياً)</div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>📌</span> <span data-i18n="lastFiveEntries">آخر 5 إدخالات</span></div>
+        <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+        <div id="recentEntries">
+          <div class="empty"><svg width="90" height="90"><use href="#panda-noodles"/></svg><p style="margin-top:6px;" data-i18n="noEntriesYet">لا توجد إدخالات بعد</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB 2: DAYS ══════ -->
+<div class="tab-panel" id="tab-days">
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+      <div class="card-title" style="margin-bottom:0;"><span>📅</span> <span data-i18n="allWorkDays">كل أيام العمل</span></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button class="btn btn-success btn-sm" onclick="quickAddToday()"><span data-i18n="todayLightning">⚡ اليوم</span></button>
+        <button id="toggleSalaryBtn" class="btn btn-outline btn-sm" onclick="toggleSalaryVis()">👁 <span data-i18n="hideSalary">إخفاء الأجر</span></button>
+      </div>
+    </div>
+    <div class="days-filter" id="daysFilter" style="margin-bottom:12px;">
+      <button class="filter-btn active" onclick="filterDays('all',this)" data-i18n="filterAll">الكل</button>
+      <button class="filter-btn" onclick="filterDays('work',this)" data-i18n="typeWork">عمل</button>
+      <button class="filter-btn" onclick="filterDays('unpaid',this)" data-i18n="filterUnpaid">غير مدفوع</button>
+      <button class="filter-btn" onclick="filterDays('paid',this)" data-i18n="filterPaid">مدفوع</button>
+      <button class="filter-btn" onclick="filterDays('sick',this)" data-i18n="typeSickShort">مرضي</button>
+      <button class="filter-btn" onclick="filterDays('vacation',this)" data-i18n="typeVacationShort">إجازة</button>
+    </div>
+    <!-- Summary strip for all days -->
+    <div class="pay-strip" id="daysTotalStrip" style="margin-bottom:16px;" id="daysPayStrip">
+      <div class="pay-strip-item ps-total">
+        <div class="ps-val salary-val" id="dTotalSalary">0.00€</div>
+        <div class="ps-lbl" data-i18n="totalLabel">💶 الإجمالي</div>
+      </div>
+      <div class="pay-strip-item ps-paid">
+        <div class="ps-val salary-val" id="dPaidAmt">0.00€</div>
+        <div class="ps-lbl" data-i18n="paidLabel">✅ المدفوع</div>
+      </div>
+      <div class="pay-strip-item ps-remaining">
+        <div class="ps-val salary-val" id="dRemainingAmt">0.00€</div>
+        <div class="ps-lbl" data-i18n="remainingLabel">⏳ المتبقي</div>
+      </div>
+    </div>
+
+    <div class="bulk-pay-card">
+      <div style="font-weight:700;font-size:0.85rem;margin-bottom:10px;" data-i18n="bulkPayTitle">💳 تحديد دفعة دفعة وحدة</div>
+      <div style="display:flex;gap:8px;align-items:end;flex-wrap:wrap;margin-bottom:10px;">
+        <div><label data-i18n="monthLabel">الشهر</label><select id="bulkPayMonth"></select></div>
+        <div><label data-i18n="yearLabel">السنة</label><select id="bulkPayYear"></select></div>
+        <button class="btn btn-success btn-sm" onclick="markWholeMonthPaid()" data-i18n="markMonthPaidBtn">✅ تحديد الشهر بالكامل كمدفوع</button>
+      </div>
+      <div style="border-top:1px solid var(--border);margin:10px 0;padding-top:10px;">
+        <button class="btn btn-outline btn-sm" id="selectModeBtn" onclick="toggleSelectMode()" data-i18n="selectDaysBtn">🖱️ تحديد أيام معيّنة</button>
+        <span id="selectModeBar" style="display:none;margin-top:10px;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px;">
+            <span id="selectCountLabel" style="font-size:0.8rem;color:var(--muted);"></span>
+            <button class="btn btn-outline btn-sm" onclick="selectAllDays(true)" data-i18n="selectAllBtn">تحديد الكل</button>
+            <button class="btn btn-outline btn-sm" onclick="selectAllDays(false)" data-i18n="deselectAllBtn">إلغاء تحديد الكل</button>
+            <button class="btn btn-success btn-sm" onclick="markSelectedPaid(true)" data-i18n="markSelectedPaidBtn">✅ تحديد المحدد كمدفوع</button>
+            <button class="btn btn-warning btn-sm" onclick="markSelectedPaid(false)" data-i18n="markSelectedUnpaidBtn">↩️ إلغاء دفع المحدد</button>
+            <button class="btn btn-outline btn-sm" onclick="toggleSelectMode()" data-i18n="cancel">إلغاء</button>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="table-wrap" id="daysTableWrap">
+      <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+      <table>
+        <thead>
+          <tr>
+            <th class="sel-col"><input type="checkbox" id="selectAllCheckbox" onchange="selectAllDays(this.checked)"></th>
+            <th>#</th><th data-i18n="thDate">التاريخ</th><th data-i18n="thDay">اليوم</th><th data-i18n="thStart">البدء</th><th data-i18n="thEnd">الانتهاء</th>
+            <th data-i18n="thHours">الساعات</th><th data-i18n="thType">النوع</th><th data-i18n="thPay">الأجر</th><th data-i18n="thPayment">💳 الدفع</th>
+            <th data-i18n="thNote">ملاحظة</th><th data-i18n="thEdit">تعديل</th><th data-i18n="thDelete">حذف</th>
+          </tr>
+        </thead>
+        <tbody id="daysTable"></tbody>
+      </table>
+      <div class="table-total-footer" id="daysTableFooter"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB: PRINT / SAVE AS IMAGE ══════ -->
+<div class="tab-panel" id="tab-print">
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+      <div class="card-title" style="margin-bottom:0;"><span>🖼️</span> <span data-i18n="tabPrint">🖼️ أيام عملي الشهري</span></div>
+      <button class="btn btn-primary btn-sm" onclick="saveDaysAsImage()" data-i18n="saveAsImage">📸 حفظ كصورة</button>
+    </div>
+    <div class="month-nav">
+      <button class="btn btn-outline btn-sm" onclick="changePrintMonth(-1)">◀</button>
+      <select id="printMonth" onchange="renderPrintView()"></select>
+      <select id="printYear" onchange="renderPrintView()"></select>
+      <button class="btn btn-outline btn-sm" onclick="changePrintMonth(1)">▶</button>
+    </div>
+    <div style="margin-bottom:16px;">
+      <input type="text" id="printSearch" placeholder="🔎 ابحث بالتاريخ أو اسم اليوم (مثال: 2026-05 أو الأحد)" data-i18n-placeholder="printSearchPlaceholder" oninput="renderPrintView()">
+    </div>
+    <div class="view-mode-toggle" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="btn btn-outline btn-sm view-mode-btn active" id="modeBtnH" onclick="setPrintMode('horizontal')" data-i18n="viewModeHorizontal">↔ ترتيب أفقي</button>
+      <button class="btn btn-outline btn-sm view-mode-btn" id="modeBtnV" onclick="setPrintMode('vertical')" data-i18n="viewModeVertical">↕ ترتيب متسلسل (١-١٥ / ١٦-٣٠)</button>
+    </div>
+    <div id="printCapture">
+      <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+      <div id="printMeta" style="text-align:center;margin-bottom:14px;color:var(--muted);font-size:0.8rem;"></div>
+      <div id="printGroups"></div>
+      <div id="printTotalFooter" style="text-align:center;margin-top:16px;padding-top:14px;
+        border-top:2px solid var(--border);font-size:0.95rem;font-weight:800;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB 3: REPORT ══════ -->
+<div class="tab-panel" id="tab-report">
+  <div class="month-nav">
+    <button class="btn btn-outline btn-sm" onclick="changeMonth(-1)">◀</button>
+    <select id="reportMonth" onchange="renderReport()"></select>
+    <select id="reportYear" onchange="renderReport()"></select>
+    <button class="btn btn-outline btn-sm" onclick="changeMonth(1)">▶</button>
+  </div>
+
+  <!-- Monthly pay strip -->
+  <div style="background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(16,185,129,0.08));
+    border:1px solid rgba(59,130,246,0.25);border-radius:18px;padding:22px;margin-bottom:18px;">
+    <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px;" data-i18n="monthSummary">💶 ملخص شهر</div>
+    <div style="font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,var(--accent2),var(--green2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"
+      id="monthlySalary">0.00 €</div>
+    <div class="grid2" style="margin-top:14px;gap:10px;">
+      <div class="sbox blue"><div class="val" id="mDays">0</div><div class="lbl" data-i18n="workDaysLabel">أيام العمل</div></div>
+      <div class="sbox green"><div class="val" id="mHours">0</div><div class="lbl" data-i18n="totalHoursLabel">إجمالي الساعات</div></div>
+    </div>
+    <!-- 3-column pay strip -->
+    <div class="pay-strip" style="margin-top:14px;">
+      <div class="pay-strip-item ps-total">
+        <div class="ps-val" id="mTotalSalary">0.00€</div>
+        <div class="ps-lbl" data-i18n="totalLabel">💶 الإجمالي</div>
+      </div>
+      <div class="pay-strip-item ps-paid">
+        <div class="ps-val" id="mPaidAmt">0.00€</div>
+        <div class="ps-lbl" data-i18n="paidLabel">✅ المدفوع</div>
+      </div>
+      <div class="pay-strip-item ps-remaining">
+        <div class="ps-val" id="mUnpaidAmt">0.00€</div>
+        <div class="ps-lbl" data-i18n="remainingLabel">⏳ المتبقي</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>📋</span> <span data-i18n="monthRecord">سجل الشهر</span></div>
+    <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="thDate">التاريخ</th><th data-i18n="thDay">اليوم</th><th data-i18n="thStart">البدء</th><th data-i18n="thEnd">الانتهاء</th>
+            <th data-i18n="thHours">الساعات</th><th data-i18n="thType">النوع</th><th data-i18n="thPay">الأجر</th><th data-i18n="thPayment">💳 الدفع</th>
+            <th data-i18n="thNote">ملاحظة</th><th data-i18n="thEdit">تعديل</th><th data-i18n="thDelete">حذف</th>
+          </tr>
+        </thead>
+        <tbody id="reportTable">
+          <tr><td colspan="11" style="text-align:center;padding:40px;color:var(--muted);" data-i18n="chooseMonth">اختر الشهر</td></tr>
+        </tbody>
+      </table>
+      <div class="table-total-footer" id="reportTableFooter"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB: COMMITMENTS ══════ -->
+<div class="tab-panel" id="tab-commit">
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title"><span>📋</span> <span data-i18n="commitAddTitle">📋 إضافة التزام</span></div>
+      <div style="margin-bottom:13px"><label data-i18n="commitNameLabel">اسم الالتزام</label>
+        <input type="text" id="cmName" placeholder="مثلاً: إيجار البيت" data-i18n-placeholder="commitNamePlaceholder"></div>
+      <div class="grid2" style="margin-bottom:13px">
+        <div><label data-i18n="commitMonthlyAmountLabel">المبلغ الشهري (€)</label><input type="number" id="cmAmount" min="0" step="0.01" placeholder="0.00"></div>
+        <div><label data-i18n="thType">النوع</label>
+          <select id="cmType">
+            <option value="rent" data-i18n="commitTypeRent">🏠 إيجار</option>
+            <option value="debt" data-i18n="commitTypeDebt">💳 دين</option>
+            <option value="subscription" data-i18n="commitTypeSubscription">🔁 اشتراك</option>
+            <option value="bill" data-i18n="commitTypeBill">🧾 فاتورة</option>
+            <option value="other" data-i18n="commitTypeOther">📌 أخرى</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:16px"><label data-i18n="noteOptional">ملاحظة (اختياري)</label>
+        <input type="text" id="cmNote" placeholder="مثلاً: يستحق يوم 1 من الشهر" data-i18n-placeholder="commitNotePlaceholder"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="commitSaveButton" onclick="saveCommitment()" data-i18n="commitSaveBtn">💾 حفظ الالتزام</button>
+        <button class="btn btn-outline" onclick="clearCommitForm()" data-i18n="clear">✖ مسح</button>
+      </div>
+      <div id="commitFeedback" style="margin-top:11px;font-size:0.82rem;display:none;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>💰</span> <span data-i18n="incomeAddTitle">💰 إضافة دخل</span></div>
+      <div style="margin-bottom:13px"><label data-i18n="date">التاريخ</label><input type="date" id="inDate"></div>
+      <div style="margin-bottom:13px"><label data-i18n="incomeAmountLabel">المبلغ (€)</label><input type="number" id="inAmount" min="0" step="0.01" placeholder="0.00"></div>
+      <div style="margin-bottom:16px"><label data-i18n="noteOptional">ملاحظة (اختياري)</label>
+        <input type="text" id="inNote" placeholder="مثلاً: راتب، عمل إضافي" data-i18n-placeholder="incomeNotePlaceholder"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="incomeSaveButton" onclick="saveIncome()" data-i18n="incomeSaveBtn">💾 حفظ الدخل</button>
+        <button class="btn btn-outline" onclick="clearIncomeForm()" data-i18n="clear">✖ مسح</button>
+      </div>
+      <div id="incomeFeedback" style="margin-top:11px;font-size:0.82rem;display:none;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+      <div class="card-title" style="margin-bottom:0;"><span>📊</span> <span data-i18n="commitSummaryTitle">📊 التزاماتي الشهرية</span></div>
+      <button class="btn btn-primary btn-sm" onclick="saveCommitmentsAsImage()" data-i18n="saveAsImage">📸 حفظ كصورة</button>
+    </div>
+    <div class="month-nav" style="margin-bottom:16px;">
+      <button class="btn btn-outline btn-sm" onclick="changeIncomeMonth(-1)">◀</button>
+      <select id="incomeMonth" onchange="renderCommitments()"></select>
+      <select id="incomeYear" onchange="renderCommitments()"></select>
+      <button class="btn btn-outline btn-sm" onclick="changeIncomeMonth(1)">▶</button>
+    </div>
+    <div id="commitCapture">
+      <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+      <div class="grid2">
+        <div class="sbox green"><div class="val" id="cmIncome">0.00€</div><div class="lbl" data-i18n="incomeThisMonth">دخل الشهر الحالي</div></div>
+        <div class="sbox red"><div class="val" id="cmTotalObligations">0.00€</div><div class="lbl" data-i18n="totalObligations">إجمالي الالتزامات</div></div>
+      </div>
+      <div class="sbox blue" style="margin-top:10px;"><div class="val" id="cmNet">0.00€</div><div class="lbl" data-i18n="netAfterObligations">الصافي بعد الالتزامات</div></div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:20px;margin-bottom:8px;">
+        <div style="font-size:0.82rem;color:var(--muted);" data-i18n="commitmentsListLabel">📋 الالتزامات</div>
+        <button class="btn btn-outline btn-sm" onclick="saveCommitTableAsImage()" data-i18n="saveAsImage">📸 حفظ كصورة</button>
+      </div>
+      <div id="commitTableCapture">
+        <div class="table-wrap">
+          <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+          <table>
+            <thead><tr><th data-i18n="thCommitment">الالتزام</th><th data-i18n="thType">النوع</th><th data-i18n="thAmount">المبلغ</th><th data-i18n="thNote">ملاحظة</th><th class="action-col" data-i18n="thActions">الإجراءات</th></tr></thead>
+            <tbody id="commitTable">
+              <tr><td colspan="5" style="text-align:center;padding:30px;color:var(--muted);" data-i18n="noCommitmentsYet">لا توجد التزامات بعد</td></tr>
+            </tbody>
+          </table>
+          <div class="table-total-footer" id="commitTotalFooter"></div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:20px;margin-bottom:8px;">
+        <div style="font-size:0.82rem;color:var(--muted);" data-i18n="incomeListLabel">💰 الدخل المدخل</div>
+        <button class="btn btn-outline btn-sm" onclick="saveIncomeTableAsImage()" data-i18n="saveAsImage">📸 حفظ كصورة</button>
+      </div>
+      <div id="incomeTableCapture">
+        <div class="table-wrap">
+          <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+          <table>
+            <thead><tr><th data-i18n="thDate">التاريخ</th><th data-i18n="thAmount">المبلغ</th><th data-i18n="thNote">ملاحظة</th><th class="action-col" data-i18n="thActions">الإجراءات</th></tr></thead>
+            <tbody id="incomeTable">
+              <tr><td colspan="4" style="text-align:center;padding:30px;color:var(--muted);" data-i18n="noIncomeYet">لا يوجد دخل مدخل بعد</td></tr>
+            </tbody>
+          </table>
+          <div class="table-total-footer" id="incomeTotalFooter"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB: BY COMPANY ══════ -->
+<div class="tab-panel" id="tab-company">
+  <div class="card">
+    <div class="card-title"><span>🔧</span> <span data-i18n="bulkAssignTitle">🔧 تعيين شركة لعدة أيام دفعة وحدة</span></div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;" data-i18n="bulkAssignDesc">
+      بتقدر تعيّن شركة لكل الأيام قبل (أو بعد) تاريخ معيّن دفعة وحدة — مفيد لتصنيف أيام قديمة أدخلتها قبل ما تضيف اسم الشركة.
+    </p>
+    <div style="margin-bottom:12px;"><label data-i18n="companyFieldLabel">الشركة</label><select id="bulkAssignCompany"></select></div>
+    <div class="grid2" style="margin-bottom:12px;">
+      <div><label data-i18n="directionLabel">الاتجاه</label>
+        <select id="bulkAssignDir">
+          <option value="before" data-i18n="dirBefore">قبل تاريخ</option>
+          <option value="after" data-i18n="dirAfter">بعد أو يساوي تاريخ</option>
+        </select>
+      </div>
+      <div><label data-i18n="date">التاريخ</label><input type="date" id="bulkAssignDate"></div>
+    </div>
+    <button class="btn btn-primary" onclick="bulkAssignCompanyToEntries()" data-i18n="applyBtn">✅ تطبيق</button>
+    <div id="bulkAssignFeedback" style="margin-top:11px;font-size:0.82rem;display:none;"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span>🏭</span> <span data-i18n="companyViewTitle">🏭 عرض العمل حسب اسم الشركة</span></div>
+    <div style="margin-bottom:16px;">
+      <label data-i18n="chooseCompanyLabel">اختر الشركة</label>
+      <select id="companySelect" onchange="renderCompanyView()"></select>
+    </div>
+    <div class="grid2" style="margin-bottom:6px;">
+      <div class="sbox blue"><div class="val" id="coDays">0</div><div class="lbl" data-i18n="workDaysCountLabel">عدد أيام العمل</div></div>
+      <div class="sbox green"><div class="val" id="coHours">0.00</div><div class="lbl" data-i18n="totalHoursLabel">إجمالي الساعات</div></div>
+    </div>
+    <div class="sbox" style="margin-top:10px;"><div class="val" id="coPay" style="color:var(--green2)">0.00€</div><div class="lbl" data-i18n="totalPayLabel">إجمالي الأجر</div></div>
+  </div>
+  <div class="card">
+    <div class="table-wrap">
+      <div class="alanizi-title" data-i18n="reportCustomTitle">Alanizi</div>
+      <table>
+        <thead><tr><th data-i18n="thDate">التاريخ</th><th data-i18n="thDay">اليوم</th><th data-i18n="thStart">البدء</th><th data-i18n="thEnd">الانتهاء</th><th data-i18n="thHours">الساعات</th><th data-i18n="thPay">الأجر</th><th data-i18n="thNote">ملاحظة</th></tr></thead>
+        <tbody id="companyTable">
+          <tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);" data-i18n="noData">لا توجد بيانات</td></tr>
+        </tbody>
+      </table>
+      <div class="table-total-footer" id="companyTableFooter"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB 4: SETTINGS ══════ -->
+<div class="tab-panel" id="tab-settings">
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-title"><span>💶</span> <span data-i18n="wageSettings">إعدادات الأجر</span></div>
+        <div style="margin-bottom:13px"><label data-i18n="hourlyWageLabel">أجر الساعة (€)</label>
+          <input type="number" id="hourlyWage" placeholder="مثلاً: 15.50" data-i18n-placeholder="wagePlaceholder" step="0.01" min="0"></div>
+        <div style="margin-bottom:16px"><label data-i18n="dailyWorkHours">ساعات العمل اليومية</label>
+          <input type="number" id="workHours" value="8" step="0.5" min="1" max="12"></div>
+        <button class="btn btn-success" onclick="saveSettings()"><span data-i18n="saveSettingsBtn">💾 حفظ الإعدادات</span></button>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🌞🌙</span> <span data-i18n="shiftPresetsTitle">دوامي الافتراضي (نهاري / ليلي)</span></div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-bottom:12px;" data-i18n="shiftPresetsHint">حدد أوقات كل دوام هون، وبعدين بس تسجل يوم عمل بتقدر تختار 🌞 أو 🌙 وبيتعبى الوقت تلقائياً.</div>
+        <div style="margin-bottom:8px;font-weight:700;font-size:0.85rem;" data-i18n="dayShiftLabel">🌞 الدوام النهاري</div>
+        <div class="grid2" style="margin-bottom:16px">
+          <div><label data-i18n="fromHourLabel">من الساعة</label><input type="time" id="dayShiftStart" value="07:00"></div>
+          <div><label data-i18n="toHourLabel">إلى الساعة</label><input type="time" id="dayShiftEnd" value="16:00"></div>
+        </div>
+        <div style="margin-bottom:8px;font-weight:700;font-size:0.85rem;" data-i18n="nightShiftLabel">🌙 الدوام الليلي</div>
+        <div class="grid2" style="margin-bottom:16px">
+          <div><label data-i18n="fromHourLabel">من الساعة</label><input type="time" id="nightShiftStart" value="15:00"></div>
+          <div><label data-i18n="toHourLabel">إلى الساعة</label><input type="time" id="nightShiftEnd" value="23:30"></div>
+        </div>
+        <button class="btn btn-success" onclick="saveSettings()"><span data-i18n="saveSettingsBtn">💾 حفظ الإعدادات</span></button>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>📆</span> <span data-i18n="weeklyWorkDays">أيام العمل الأسبوعية</span></div>
+        <div id="weekdaysToggle"></div>
+        <div style="margin-top:10px;font-size:0.76rem;color:var(--muted);" data-i18n="closedMeansWeekly">المُغلق = عطلة أسبوعية</div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🏭</span> <span data-i18n="companyMgmtTitle">🏭 أسماء الشركات / أماكن العمل</span></div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;">
+          <input type="text" id="newCompanyName" placeholder="مثلاً: معمل أحذية" data-i18n-placeholder="companyNamePlaceholder" style="flex:1;min-width:140px;">
+          <input type="number" id="newCompanyWage" placeholder="أجر الساعة €" data-i18n-placeholder="companyWagePlaceholder" min="0" step="0.01" style="width:120px;">
+        </div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-bottom:10px;" data-i18n="companyWageHint">إذا تركت أجر الساعة فاضي، رح يُستخدم الأجر العام من إعدادات الأجر بالأعلى.</div>
+        <details style="margin-bottom:12px;" open>
+          <summary style="cursor:pointer;color:var(--muted);font-size:0.8rem;" data-i18n="companyScheduleSummary">⏰ دوام افتراضي لهذه الشركة (اختياري)</summary>
+          <div class="grid2" style="margin-top:10px;">
+            <div><label data-i18n="fromHourLabel">من الساعة</label><input type="time" id="newCompanyStart"></div>
+            <div><label data-i18n="toHourLabel">إلى الساعة</label><input type="time" id="newCompanyEnd"></div>
+          </div>
+          <div style="margin-top:10px;"><label data-i18n="breakMinutes">استراحة (دقيقة)</label><input type="number" id="newCompanyBreak" min="0" step="5" placeholder="60"></div>
+          <div style="font-size:0.72rem;color:var(--muted);margin-top:6px;" data-i18n="companyScheduleHint">لما تختار هالشركة بنموذج تسجيل يوم عمل، رح يتعبى وقت البدء والانتهاء والاستراحة تلقائياً.</div>
+          <div style="font-size:0.72rem;color:var(--accent2);margin-top:6px;" data-i18n="companyEveningShiftHint">🌙 لدوام مسائي يمتد لليوم التالي (مثلاً من الساعة 3 الظهر لـ 1:30 بعد نص الليل)، اختر "إلى الساعة" بنفس وقتها بعد نص الليل — البرنامج بيحسبها صح تلقائياً.</div>
+        </details>
+        <button class="btn btn-primary btn-sm" onclick="addCompanyName()" style="margin-bottom:10px;" data-i18n="addCompanyBtn">➕ إضافة شركة</button>
+        <ul class="hol-list" id="companyNameList"></ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span>🚚</span> <span data-i18n="extraTaskMgmtTitle">🚚 أعمال إضافية (مثل تفريغ الحاويات)</span></div>
+        <div style="margin-bottom:8px"><label data-i18n="extraTaskNameLabel">اسم العمل الإضافي</label>
+          <input type="text" id="newTaskName" placeholder="مثلاً: كونتينر 120 طن" data-i18n-placeholder="extraTaskNamePlaceholder"></div>
+        <div class="grid2" style="margin-bottom:10px">
+          <div><label data-i18n="incomeAmountLabel">المبلغ (€)</label><input type="number" id="newTaskAmount" min="0" step="0.01" placeholder="50.00"></div>
+          <div><label data-i18n="companyFieldLabel">الشركة</label><select id="newTaskCompany"><option value="" data-i18n="allCompaniesOption">لكل الشركات</option></select></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="addExtraTask()" style="margin-bottom:10px;" data-i18n="addBtn">➕ إضافة</button>
+        <ul class="hol-list" id="extraTaskList"></ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title"><span>🇩🇪</span> <span data-i18n="germanHolidays">العطل الرسمية الألمانية</span></div>
+        <ul class="hol-list" id="fixedHolidayList"></ul>
+        <div class="sep"></div>
+        <div style="margin-bottom:8px;font-size:0.76rem;color:var(--muted2);" data-i18n="addCustomHoliday">إضافة عطلة مخصصة:</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px;">
+          <input type="date" id="customHolDate" style="flex:1;min-width:120px;">
+          <input type="text" id="customHolName" placeholder="الاسم" data-i18n-placeholder="nameLabel" style="flex:1;min-width:110px;">
+          <button class="btn btn-primary btn-sm" onclick="addCustomHoliday()">➕</button>
+        </div>
+        <ul class="hol-list" id="customHolidayList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>💾</span> <span data-i18n="backupTitle">💾 نسخة احتياطية للبيانات</span></div>
+    <p style="font-size:0.8rem;color:var(--muted);line-height:1.8;margin-bottom:14px;" data-i18n="backupDesc">
+      بياناتك محفوظة أوتوماتيكياً بهذا المتصفح/الجهاز وما بتروح إذا سويت تحديث للصفحة.
+      بس إذا مسحت بيانات المتصفح، أو بدك تنقل بياناتك لجهاز/متصفح تاني، احفظ نسخة احتياطية هون.
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="exportBackup()" data-i18n="downloadBackupBtn">⬇ تنزيل نسخة احتياطية</button>
+      <button class="btn btn-outline" onclick="document.getElementById('restoreFile').click()" data-i18n="restoreBackupBtn">⬆ استعادة من نسخة احتياطية</button>
+      <input type="file" id="restoreFile" accept="application/json" style="display:none;" onchange="importBackup(this.files[0])">
+    </div>
+    <div id="backupFeedback" style="margin-top:11px;font-size:0.82rem;display:none;"></div>
+  </div>
+</div>
+
+</main>
+
+<!-- ══ EDIT MODAL ══ -->
+<div class="modal-overlay" id="editModal" style="display:none;" onclick="maybeCloseModal(event)">
+  <div class="modal-box">
+    <div class="modal-title">
+      <span><span data-i18n="editPrefix">✏️ تعديل –</span> <span id="editDateLabel"></span></span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <input type="hidden" id="editDate">
+    <div style="margin-bottom:13px"><label data-i18n="entryCompanyLabel">اسم العمل / الشركة (اختياري)</label>
+      <select id="editCompany"><option value="" data-i18n="withoutOption">— بدون —</option></select></div>
+    <div class="grid2" style="margin-bottom:13px">
+      <div><label data-i18n="entryExtraTaskLabel">🚚 عمل إضافي (اختياري)</label>
+        <select id="editExtraTask" onchange="updEditCalc()"><option value="" data-i18n="withoutOption">— بدون —</option></select></div>
+      <div><label data-i18n="qtyLabel">الكمية</label>
+        <input type="number" id="editExtraQty" value="1" min="1" step="1" oninput="updEditCalc()"></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <label data-i18n="shiftSwitchLabel">نوع الدوام (اختياري)</label>
+      <div>
+        <input type="hidden" id="editShiftType" value="">
+        <div class="shift-switch" id="editShiftSwitch">
+          <button type="button" data-shift="day" onclick="applyShiftPreset('edit','day')">🌞</button>
+          <button type="button" data-shift="night" onclick="applyShiftPreset('edit','night')">🌙</button>
+        </div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-bottom:13px">
+      <div><label data-i18n="startTime">وقت البدء</label><input type="time" id="editStart"></div>
+      <div><label data-i18n="endTime">وقت الانتهاء</label><input type="time" id="editEnd"></div>
+    </div>
+    <div style="margin-bottom:13px"><label data-i18n="breakMinutes">استراحة (دقيقة)</label>
+      <input type="number" id="editBreak" min="0" max="180"></div>
+    <div style="margin-bottom:13px">
+      <label data-i18n="dayType">نوع اليوم</label>
+      <select id="editType">
+        <option value="work" data-i18n="typeWorkNormal">يوم عمل عادي</option>
+        <option value="sick" data-i18n="typeSick">إجازة مرضية</option>
+        <option value="vacation" data-i18n="typeVacation">إجازة سنوية</option>
+        <option value="holiday" data-i18n="typeHoliday">عطلة رسمية</option>
+        <option value="weekly" data-i18n="typeWeekly">عطلة أسبوعية</option>
+      </select>
+    </div>
+    <div style="margin-bottom:18px"><label data-i18n="noteBare">ملاحظة</label>
+      <input type="text" id="editNote" placeholder="ملاحظة اختيارية" data-i18n-placeholder="optionalNotePlaceholder"></div>
+    <div id="editCalcInfo" style="padding:11px;background:var(--bg);border-radius:9px;
+      font-size:0.8rem;color:var(--muted);line-height:1.8;margin-bottom:16px;"></div>
+    <div id="editNightShiftHint" style="margin-bottom:16px;font-size:0.76rem;color:var(--accent2);display:none;" data-i18n="nightShiftHint">🌙 الدوام يمتد لليوم التالي (يُحتسب تلقائياً)</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;">
+      <button class="btn btn-success" onclick="saveEdit()"><span data-i18n="saveEditBtn">💾 حفظ التعديل</span></button>
+      <button class="btn btn-outline" onclick="closeModal()"><span data-i18n="cancel">إلغاء</span></button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════════
+//  I18N (Arabic / German)
+// ════════════════════════════════════════
+const I18N={
+  ar:{
+    subtitle:'نظام تتبع ساعات العمل – ألمانيا',
+    days:'أيام',hours:'ساعات',salary:'الراتب',install:'📲 تثبيت',
+    tabEntry:'📝 تسجيل',tabDays:'📅 أيام العمل',tabReport:'📊 التقارير',tabSettings:'⚙️ الإعدادات',
+    registerWorkDay:'تسجيل يوم عمل',date:'التاريخ',startTime:'وقت البدء',endTime:'وقت الانتهاء',
+    breakMinutes:'استراحة (دقيقة)',dayType:'نوع اليوم',
+    typeWorkNormal:'يوم عمل عادي',typeSick:'إجازة مرضية',typeVacation:'إجازة سنوية',
+    typeHoliday:'عطلة رسمية',typeWeekly:'عطلة أسبوعية',
+    typeWork:'عمل',typeSickShort:'مرضي',typeVacationShort:'إجازة',
+    noteOptional:'ملاحظة (اختياري)',notePlaceholder:'مثلاً: اجتماع أو عمل إضافي',
+    save:'💾 حفظ',quickAddAuto:'⚡ اليوم تلقائي',todayBtn:'📆 اليوم',clear:'✖ مسح',
+    instantCalc:'الحساب الفوري',dayPay:'أجر اليوم',
+    workingHoursLabel:'⏰ دوام:',breakLabel:'☕ استراحة:',minutes:'دقيقة',hourlyRateLabel:'💶 أجر الساعة:',
+    notSet:'لم يُحدَّد',perHour:'€/ساعة',
+    lastFiveEntries:'آخر 5 إدخالات',noEntriesYet:'لا توجد إدخالات بعد',
+    allWorkDays:'كل أيام العمل',todayLightning:'⚡ اليوم',hideSalary:'إخفاء الأجر',showSalary:'إظهار الأجر',
+    filterAll:'الكل',filterUnpaid:'غير مدفوع',filterPaid:'مدفوع',
+    totalLabel:'💶 الإجمالي',paidLabel:'✅ المدفوع',remainingLabel:'⏳ المتبقي',
+    thDate:'التاريخ',thDay:'اليوم',thStart:'البدء',thEnd:'الانتهاء',thHours:'الساعات',
+    thType:'النوع',thPay:'الأجر',thPayment:'💳 الدفع',thNote:'ملاحظة',thEdit:'تعديل',thDelete:'حذف',
+    monthSummary:'💶 ملخص شهر',workDaysLabel:'أيام العمل',totalHoursLabel:'إجمالي الساعات',
+    monthRecord:'سجل الشهر',chooseMonth:'اختر الشهر',noData:'لا توجد بيانات',noResults:'لا توجد نتائج',
+    wageSettings:'إعدادات الأجر',hourlyWageLabel:'أجر الساعة (€)',wagePlaceholder:'مثلاً: 15.50',
+    dailyWorkHours:'ساعات العمل اليومية',saveSettingsBtn:'💾 حفظ الإعدادات',
+    weeklyWorkDays:'أيام العمل الأسبوعية',closedMeansWeekly:'المُغلق = عطلة أسبوعية',
+    germanHolidays:'العطل الرسمية الألمانية',addCustomHoliday:'إضافة عطلة مخصصة:',
+    nameLabel:'الاسم',noCustomHolidays:'لا توجد عطل مخصصة',deleteWord:'حذف',
+    editPrefix:'✏️ تعديل –',noteBare:'ملاحظة',optionalNotePlaceholder:'ملاحظة اختيارية',
+    saveEditBtn:'💾 حفظ التعديل',cancel:'إلغاء',
+    paidDone:'✅ تم الدفع',payQuestion:'💳 دفع؟',
+    toastSettingsSaved:'✅ تم حفظ الإعدادات',toastHolidayAdded:'✅ تم إضافة العطلة',
+    toastEnterDateName:'⚠️ أدخل التاريخ والاسم',toastDateExists:'⚠️ التاريخ موجود',
+    toastDeleted:'🗑 تم الحذف',toastInstalled:'✅ تم التثبيت!',toastInstalling:'🎉 جاري التثبيت...',
+    toastTodayAlready:'⚠️ اليوم مسجل بالفعل',toastTodayAutoAdded:'✅ تم إضافة اليوم تلقائياً',
+    toastPaymentRecorded:'✅ تم تسجيل الدفع',toastPaymentCancelled:'↩️ تم إلغاء الدفع',
+    toastSavedSuccess:'🐻 تم الحفظ بنجاح!',toastPleaseSelectDate:'⚠️ الرجاء اختيار التاريخ',
+    toastRecordNotFound:'⚠️ لم يُوجد السجل',toastEdited:'✅ تم التعديل',toastInstalled2:'✅ تم التثبيت!',
+    confirmOffDay:d=>`${d} يوم عطلة. هل تسجّله كعمل؟`,
+    confirmReplace:'يوجد سجل لهذا اليوم. استبداله؟',
+    confirmDelete:d=>`حذف سجل ${d}؟`,
+    installTitle:'تثبيت Madi Work Tracker',installGotIt:'فهمت ✓',
+    installIOS:'📱 iOS: اضغط ⬆️ ثم "Add to Home Screen"',
+    installChrome:'💻 Chrome: اضغط ⋮ ثم "Install app"',
+    installOther:'🌐 ابحث في قائمة المتصفح عن "تثبيت"',
+    hoursShort:'⏱ الساعات:',payShort:'💶 الأجر:',
+    months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+    weekdaysFull:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
+    tabPrint:'🖼️ أيام عملي الشهري',tabCommit:'📋 التزاماتي',tabCompany:'🏭 حسب الشركة',
+    saveAsImage:'📸 حفظ كصورة',printSearchPlaceholder:'🔎 ابحث بالتاريخ أو اسم اليوم (مثال: 2026-05 أو الأحد)',
+    viewModeHorizontal:'↔ ترتيب أفقي',viewModeVertical:'↕ ترتيب متسلسل (١-١٥ / ١٦-٣٠)',
+    dayDateHeader:'اليوم / التاريخ',workDaysCountLabel:'عدد أيام العمل',
+    commitAddTitle:'📋 إضافة التزام',commitNameLabel:'اسم الالتزام',commitNamePlaceholder:'مثلاً: إيجار البيت',
+    commitMonthlyAmountLabel:'المبلغ الشهري (€)',
+    commitTypeRent:'🏠 إيجار',commitTypeDebt:'💳 دين',commitTypeSubscription:'🔁 اشتراك',
+    commitTypeBill:'🧾 فاتورة',commitTypeOther:'📌 أخرى',
+    commitNotePlaceholder:'مثلاً: يستحق يوم 1 من الشهر',commitSaveBtn:'💾 حفظ الالتزام',
+    incomeAddTitle:'💰 إضافة دخل',incomeAmountLabel:'المبلغ (€)',
+    incomeNotePlaceholder:'مثلاً: راتب، عمل إضافي',incomeSaveBtn:'💾 حفظ الدخل',
+    commitSummaryTitle:'📊 التزاماتي الشهرية',incomeThisMonth:'دخل الشهر المحدد',
+    totalObligations:'إجمالي الالتزامات',netAfterObligations:'الصافي بعد الالتزامات',totalIncomeLabel:'إجمالي الدخل',
+    bulkPayTitle:'💳 تحديد دفعة دفعة وحدة',monthLabel:'الشهر',yearLabel:'السنة',
+    markMonthPaidBtn:'✅ تحديد الشهر بالكامل كمدفوع',
+    selectDaysBtn:'🖱️ تحديد أيام معيّنة',selectAllBtn:'تحديد الكل',deselectAllBtn:'إلغاء تحديد الكل',
+    markSelectedPaidBtn:'✅ تحديد المحدد كمدفوع',markSelectedUnpaidBtn:'↩️ إلغاء دفع المحدد',
+    selectedCountLabel:n=>`تم تحديد ${n} يوم`,
+    confirmMarkMonthPaid:(month,year)=>`سيتم تحديد كل أيام العمل بشهر ${month} ${year} كمدفوعة بالكامل. متابعة؟`,
+    monthMarkedPaidToast:count=>`تم تحديد ${count} يوم كمدفوع ✅`,
+    noWorkDaysInMonthToast:'لا توجد أيام عمل بهذا الشهر',
+    noDaysSelectedToast:'ما في أيام محددة',
+    confirmMarkSelectedPaid:count=>`تحديد ${count} يوم كمدفوع بالكامل؟`,
+    confirmMarkSelectedUnpaid:count=>`إلغاء دفع ${count} يوم؟`,
+    commitmentsListLabel:'📋 الالتزامات',incomeListLabel:'💰 الدخل المدخل',
+    thCommitment:'الالتزام',thAmount:'المبلغ',
+    noCommitmentsYet:'لا توجد التزامات بعد',noIncomeYet:'لا يوجد دخل مدخل بعد',
+    commitNameAmountError:'الرجاء إدخال اسم الالتزام والمبلغ بشكل صحيح',
+    incomeAmountError:'الرجاء إدخال مبلغ صحيح',
+    commitSavedToast:'تم حفظ الالتزام ✅',incomeSavedToast:'تم حفظ الدخل ✅',
+    confirmDeleteCommitment:'هل تريد حذف هذا الالتزام؟',confirmDeleteIncome:'هل تريد حذف هذا الدخل؟',
+    imageSavedToast:'تم حفظ الصورة ✅',imageSaveErrorToast:'حدث خطأ أثناء الحفظ',
+    bulkAssignTitle:'🔧 تعيين شركة لعدة أيام دفعة وحدة',
+    bulkAssignDesc:'بتقدر تعيّن شركة لكل الأيام قبل (أو بعد) تاريخ معيّن دفعة وحدة — مفيد لتصنيف أيام قديمة أدخلتها قبل ما تضيف اسم الشركة.',
+    companyFieldLabel:'الشركة',directionLabel:'الاتجاه',dirBefore:'قبل تاريخ',dirAfter:'بعد أو يساوي تاريخ',
+    dirBeforeShort:'قبل',dirAfterShort:'بعد أو يساوي',applyBtn:'✅ تطبيق',
+    bulkMissingError:'اختر الشركة والتاريخ أولاً',
+    bulkConfirmPrefix:(company,dirLabel,cutoff)=>`سيتم تعيين "${company}" لكل الأيام ${dirLabel} ${cutoff}. متابعة؟`,
+    bulkUpdatedToast:count=>`تم تحديث ${count} يوم ✅`,
+    companyViewTitle:'🏭 عرض العمل حسب اسم الشركة',chooseCompanyLabel:'اختر الشركة',
+    totalPayLabel:'إجمالي الأجر',noWorkDaysForCompany:'لا توجد أيام عمل لهذه الشركة',
+    noCompanyNamesYet:'لا يوجد أسماء شركات بعد',withoutOption:'— بدون —',
+    companyMgmtTitle:'🏭 أسماء الشركات / أماكن العمل',companyNamePlaceholder:'مثلاً: معمل أحذية',
+    companyWagePlaceholder:'أجر الساعة €',
+    companyWageHint:'إذا تركت أجر الساعة فاضي، رح يُستخدم الأجر العام من إعدادات الأجر بالأعلى.',
+    companyScheduleSummary:'⏰ دوام افتراضي لهذه الشركة (اختياري)',
+    fromHourLabel:'من الساعة',toHourLabel:'إلى الساعة',
+    companyScheduleHint:'لما تختار هالشركة بنموذج تسجيل يوم عمل، رح يتعبى وقت البدء والانتهاء والاستراحة تلقائياً.',
+    addCompanyBtn:'➕ إضافة شركة',noNamesYet:'لا توجد أسماء بعد',
+    companyNameRequiredToast:'اكتب اسم الشركة أولاً',companyExistsToast:'هذا الاسم موجود مسبقاً',
+    genericAddedToast:'تمت الإضافة ✅',
+    confirmDeleteCompanyPrefix:name=>`حذف "${name}" من قائمة الشركات؟ (الأيام المسجلة عليها ما بتتحذف)`,
+    breakWordShort:'استراحة',
+    extraTaskMgmtTitle:'🚚 أعمال إضافية (مثل تفريغ الحاويات)',extraTaskNameLabel:'اسم العمل الإضافي',
+    extraTaskNamePlaceholder:'مثلاً: كونتينر 120 طن',allCompaniesOption:'لكل الشركات',
+    addBtn:'➕ إضافة',noExtraTasksYet:'لا توجد أعمال إضافية بعد',
+    extraTaskRequiredToast:'اكتب اسم العمل ومبلغ صحيح',confirmDeleteExtraTask:'حذف هذا العمل الإضافي؟',
+    entryCompanyLabel:'اسم العمل / الشركة (اختياري)',entryExtraTaskLabel:'🚚 عمل إضافي (اختياري)',
+    qtyLabel:'الكمية',
+    backupTitle:'💾 نسخة احتياطية للبيانات',
+    backupDesc:'بياناتك محفوظة أوتوماتيكياً بهذا المتصفح/الجهاز وما بتروح إذا سويت تحديث للصفحة. بس إذا مسحت بيانات المتصفح، أو بدك تنقل بياناتك لجهاز/متصفح تاني، احفظ نسخة احتياطية هون.',
+    downloadBackupBtn:'⬇ تنزيل نسخة احتياطية',restoreBackupBtn:'⬆ استعادة من نسخة احتياطية',
+    backupDownloadedToast:'تم تنزيل النسخة الاحتياطية ✅',
+    confirmRestoreBackup:'استعادة النسخة الاحتياطية بتستبدل كل البيانات الحالية بهذا الجهاز. متأكد؟',
+    restoreSuccessToast:'تمت الاستعادة بنجاح ✅',
+    restoreErrorMsg:'تعذّرت قراءة الملف، تأكد أنه ملف نسخة احتياطية صحيح',
+    companySpecificSuffix:' (خاص بالشركة)',minutesShort:'د',loadToolErrorToast:'تعذّر تحميل أداة الحفظ، تحقق من الاتصال',
+    nightShiftHint:'🌙 الدوام يمتد لليوم التالي (يُحتسب تلقائياً)',
+    companyEveningShiftHint:'🌙 لدوام مسائي يمتد لليوم التالي (مثلاً من الساعة 3 الظهر لـ 1:30 بعد نص الليل)، اختر "إلى الساعة" بنفس وقتها بعد نص الليل — البرنامج بيحسبها صح تلقائياً.',
+    reportCustomTitle:'Alanizi',
+    shiftPresetsTitle:'دوامي الافتراضي (نهاري / ليلي)',
+    shiftPresetsHint:'حدد أوقات كل دوام هون، وبعدين بس تسجل يوم عمل بتقدر تختار 🌞 أو 🌙 وبيتعبى الوقت تلقائياً.',
+    dayShiftLabel:'🌞 الدوام النهاري',nightShiftLabel:'🌙 الدوام الليلي',
+    shiftSwitchLabel:'نوع الدوام (اختياري)',
+    commitUpdateBtn:'💾 تحديث الالتزام',commitUpdatedToast:'تم تحديث الالتزام ✅',
+    incomeUpdateBtn:'💾 تحديث الدخل',incomeUpdatedToast:'تم تحديث الدخل ✅',thActions:'الإجراءات',
+    shiftsMgmtTitle:'🕐 دوامات إضافية (مثل دوام مسائي)',shiftsMgmtDesc:'أضف دوام مسائي أو أي دوام إضافي لشركة معينة — بيصير فيك تختار بينه وبين الدوام الافتراضي وقت تسجيل يوم عمل. الدوام يلي بيعدّي منتصف الليل (متل ٣ الظهر لـ ١:٣٠ الفجر) بيتحسب صح تلقائياً.',
+    shiftNameLabel:'اسم الدوام',shiftNamePlaceholder:'مثلاً: دوام مسائي',
+    defaultShiftLabel:'الدوام الافتراضي',shiftLabel:'الدوام',
+    noShiftsYet:'لا توجد دوامات إضافية بعد',shiftRequiredToast:'اكتب اسم الدوام واختر الشركة وحدد الأوقات',
+    confirmDeleteShift:'حذف هذا الدوام؟',
+  },
+  de:{
+    subtitle:'Arbeitszeitkonto – Deutschland',
+    days:'Tage',hours:'Stunden',salary:'Gehalt',install:'📲 Installieren',
+    tabEntry:'📝 Erfassen',tabDays:'📅 Arbeitstage',tabReport:'📊 Berichte',tabSettings:'⚙️ Einstellungen',
+    registerWorkDay:'Arbeitstag erfassen',date:'Datum',startTime:'Startzeit',endTime:'Endzeit',
+    breakMinutes:'Pause (Minuten)',dayType:'Tagesart',
+    typeWorkNormal:'Normaler Arbeitstag',typeSick:'Krankheitsurlaub',typeVacation:'Jahresurlaub',
+    typeHoliday:'Feiertag',typeWeekly:'Wöchentlich frei',
+    typeWork:'Arbeit',typeSickShort:'Krank',typeVacationShort:'Urlaub',
+    noteOptional:'Notiz (optional)',notePlaceholder:'z. B.: Meeting oder Überstunden',
+    save:'💾 Speichern',quickAddAuto:'⚡ Heute automatisch',todayBtn:'📆 Heute',clear:'✖ Löschen',
+    instantCalc:'Sofortberechnung',dayPay:'Tageslohn',
+    workingHoursLabel:'⏰ Dienst:',breakLabel:'☕ Pause:',minutes:'Minuten',hourlyRateLabel:'💶 Stundenlohn:',
+    notSet:'nicht festgelegt',perHour:'€/Std.',
+    lastFiveEntries:'Letzte 5 Einträge',noEntriesYet:'Noch keine Einträge',
+    allWorkDays:'Alle Arbeitstage',todayLightning:'⚡ Heute',hideSalary:'Gehalt ausblenden',showSalary:'Gehalt anzeigen',
+    filterAll:'Alle',filterUnpaid:'Unbezahlt',filterPaid:'Bezahlt',
+    totalLabel:'💶 Gesamt',paidLabel:'✅ Bezahlt',remainingLabel:'⏳ Ausstehend',
+    thDate:'Datum',thDay:'Tag',thStart:'Start',thEnd:'Ende',thHours:'Stunden',
+    thType:'Art',thPay:'Lohn',thPayment:'💳 Zahlung',thNote:'Notiz',thEdit:'Bearbeiten',thDelete:'Löschen',
+    monthSummary:'💶 Monatsübersicht',workDaysLabel:'Arbeitstage',totalHoursLabel:'Gesamtstunden',
+    monthRecord:'Monatsübersicht',chooseMonth:'Monat wählen',noData:'Keine Daten',noResults:'Keine Ergebnisse',
+    wageSettings:'Lohneinstellungen',hourlyWageLabel:'Stundenlohn (€)',wagePlaceholder:'z. B.: 15,50',
+    dailyWorkHours:'Tägliche Arbeitsstunden',saveSettingsBtn:'💾 Einstellungen speichern',
+    weeklyWorkDays:'Wöchentliche Arbeitstage',closedMeansWeekly:'Aus = wöchentlich frei',
+    germanHolidays:'Deutsche Feiertage',addCustomHoliday:'Eigenen Feiertag hinzufügen:',
+    nameLabel:'Name',noCustomHolidays:'Keine eigenen Feiertage',deleteWord:'Löschen',
+    editPrefix:'✏️ Bearbeiten –',noteBare:'Notiz',optionalNotePlaceholder:'Optionale Notiz',
+    saveEditBtn:'💾 Änderung speichern',cancel:'Abbrechen',
+    paidDone:'✅ Bezahlt',payQuestion:'💳 Bezahlen?',
+    toastSettingsSaved:'✅ Einstellungen gespeichert',toastHolidayAdded:'✅ Feiertag hinzugefügt',
+    toastEnterDateName:'⚠️ Datum und Name eingeben',toastDateExists:'⚠️ Datum existiert bereits',
+    toastDeleted:'🗑 Gelöscht',toastInstalled:'✅ Installiert!',toastInstalling:'🎉 Installation läuft...',
+    toastTodayAlready:'⚠️ Heute bereits erfasst',toastTodayAutoAdded:'✅ Heute automatisch hinzugefügt',
+    toastPaymentRecorded:'✅ Zahlung erfasst',toastPaymentCancelled:'↩️ Zahlung storniert',
+    toastSavedSuccess:'🐻 Erfolgreich gespeichert!',toastPleaseSelectDate:'⚠️ Bitte Datum wählen',
+    toastRecordNotFound:'⚠️ Eintrag nicht gefunden',toastEdited:'✅ Geändert',toastInstalled2:'✅ Installiert!',
+    confirmOffDay:d=>`${d} ist ein freier Tag. Trotzdem als Arbeit erfassen?`,
+    confirmReplace:'Für diesen Tag existiert bereits ein Eintrag. Ersetzen?',
+    confirmDelete:d=>`Eintrag ${d} löschen?`,
+    installTitle:'Madi Work Tracker installieren',installGotIt:'Verstanden ✓',
+    installIOS:'📱 iOS: Tippe ⬆️ und dann "Zum Home-Bildschirm"',
+    installChrome:'💻 Chrome: Klicke ⋮ und dann "App installieren"',
+    installOther:'🌐 Suche im Browsermenü nach "Installieren"',
+    hoursShort:'⏱ Stunden:',payShort:'💶 Lohn:',
+    months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+    weekdaysFull:['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
+    tabPrint:'🖼️ Meine monatlichen Arbeitstage',tabCommit:'📋 Meine Verpflichtungen',tabCompany:'🏭 Nach Firma',
+    saveAsImage:'📸 Als Bild speichern',printSearchPlaceholder:'🔎 Suche nach Datum oder Wochentag (z. B. 2026-05 oder Sonntag)',
+    viewModeHorizontal:'↔ Horizontale Anordnung',viewModeVertical:'↕ Fortlaufende Anordnung (1–15 / 16–30)',
+    dayDateHeader:'Tag / Datum',workDaysCountLabel:'Anzahl Arbeitstage',
+    commitAddTitle:'📋 Verpflichtung hinzufügen',commitNameLabel:'Name der Verpflichtung',commitNamePlaceholder:'z. B.: Miete',
+    commitMonthlyAmountLabel:'Monatsbetrag (€)',
+    commitTypeRent:'🏠 Miete',commitTypeDebt:'💳 Schulden',commitTypeSubscription:'🔁 Abonnement',
+    commitTypeBill:'🧾 Rechnung',commitTypeOther:'📌 Sonstiges',
+    commitNotePlaceholder:'z. B.: fällig am 1. des Monats',commitSaveBtn:'💾 Verpflichtung speichern',
+    incomeAddTitle:'💰 Einkommen hinzufügen',incomeAmountLabel:'Betrag (€)',
+    incomeNotePlaceholder:'z. B.: Gehalt, Nebenjob',incomeSaveBtn:'💾 Einkommen speichern',
+    commitSummaryTitle:'📊 Meine monatlichen Verpflichtungen',incomeThisMonth:'Einkommen des gewählten Monats',
+    totalObligations:'Verpflichtungen gesamt',netAfterObligations:'Netto nach Verpflichtungen',totalIncomeLabel:'Einkommen gesamt',
+    bulkPayTitle:'💳 Zahlung auf einmal markieren',monthLabel:'Monat',yearLabel:'Jahr',
+    markMonthPaidBtn:'✅ Ganzen Monat als bezahlt markieren',
+    selectDaysBtn:'🖱️ Bestimmte Tage auswählen',selectAllBtn:'Alle auswählen',deselectAllBtn:'Auswahl aufheben',
+    markSelectedPaidBtn:'✅ Auswahl als bezahlt markieren',markSelectedUnpaidBtn:'↩️ Zahlung der Auswahl aufheben',
+    selectedCountLabel:n=>`${n} Tage ausgewählt`,
+    confirmMarkMonthPaid:(month,year)=>`Alle Arbeitstage im ${month} ${year} werden vollständig als bezahlt markiert. Fortfahren?`,
+    monthMarkedPaidToast:count=>`${count} Tage als bezahlt markiert ✅`,
+    noWorkDaysInMonthToast:'Keine Arbeitstage in diesem Monat',
+    noDaysSelectedToast:'Keine Tage ausgewählt',
+    confirmMarkSelectedPaid:count=>`${count} Tage vollständig als bezahlt markieren?`,
+    confirmMarkSelectedUnpaid:count=>`Zahlung für ${count} Tage aufheben?`,
+    commitmentsListLabel:'📋 Verpflichtungen',incomeListLabel:'💰 Erfasstes Einkommen',
+    thCommitment:'Verpflichtung',thAmount:'Betrag',
+    noCommitmentsYet:'Noch keine Verpflichtungen',noIncomeYet:'Noch kein Einkommen erfasst',
+    commitNameAmountError:'Bitte Name und einen gültigen Betrag eingeben',
+    incomeAmountError:'Bitte einen gültigen Betrag eingeben',
+    commitSavedToast:'Verpflichtung gespeichert ✅',incomeSavedToast:'Einkommen gespeichert ✅',
+    confirmDeleteCommitment:'Diese Verpflichtung löschen?',confirmDeleteIncome:'Diesen Eintrag löschen?',
+    imageSavedToast:'Bild gespeichert ✅',imageSaveErrorToast:'Fehler beim Speichern',
+    bulkAssignTitle:'🔧 Firma für mehrere Tage auf einmal zuweisen',
+    bulkAssignDesc:'Du kannst einer Firma alle Tage vor (oder ab) einem bestimmten Datum auf einmal zuweisen — nützlich, um alte Einträge zu sortieren, die du vor dem Hinzufügen des Firmennamens erfasst hast.',
+    companyFieldLabel:'Firma',directionLabel:'Richtung',dirBefore:'Vor Datum',dirAfter:'Ab Datum (einschließlich)',
+    dirBeforeShort:'vor',dirAfterShort:'ab (einschließlich)',applyBtn:'✅ Anwenden',
+    bulkMissingError:'Bitte zuerst Firma und Datum wählen',
+    bulkConfirmPrefix:(company,dirLabel,cutoff)=>`"${company}" wird allen Tagen ${dirLabel} ${cutoff} zugewiesen. Fortfahren?`,
+    bulkUpdatedToast:count=>`${count} Tage aktualisiert ✅`,
+    companyViewTitle:'🏭 Arbeit nach Firma anzeigen',chooseCompanyLabel:'Firma wählen',
+    totalPayLabel:'Gesamtlohn',noWorkDaysForCompany:'Keine Arbeitstage für diese Firma',
+    noCompanyNamesYet:'Noch keine Firmennamen',withoutOption:'— Ohne —',
+    companyMgmtTitle:'🏭 Firmennamen / Arbeitsorte',companyNamePlaceholder:'z. B.: Schuhfabrik',
+    companyWagePlaceholder:'Stundenlohn €',
+    companyWageHint:'Wenn du den Stundenlohn leer lässt, wird der allgemeine Lohn aus den Einstellungen oben verwendet.',
+    companyScheduleSummary:'⏰ Standardarbeitszeit für diese Firma (optional)',
+    fromHourLabel:'Von Uhrzeit',toHourLabel:'Bis Uhrzeit',
+    companyScheduleHint:'Wenn du diese Firma im Erfassungsformular wählst, werden Start-, End- und Pausenzeit automatisch ausgefüllt.',
+    addCompanyBtn:'➕ Firma hinzufügen',noNamesYet:'Noch keine Namen',
+    companyNameRequiredToast:'Bitte zuerst einen Firmennamen eingeben',companyExistsToast:'Dieser Name existiert bereits',
+    genericAddedToast:'Hinzugefügt ✅',
+    confirmDeleteCompanyPrefix:name=>`"${name}" aus der Firmenliste löschen? (Erfasste Tage werden nicht gelöscht)`,
+    breakWordShort:'Pause',
+    extraTaskMgmtTitle:'🚚 Zusatzaufgaben (z. B. Container entladen)',extraTaskNameLabel:'Name der Zusatzaufgabe',
+    extraTaskNamePlaceholder:'z. B.: Container 120 Tonnen',allCompaniesOption:'Für alle Firmen',
+    addBtn:'➕ Hinzufügen',noExtraTasksYet:'Noch keine Zusatzaufgaben',
+    extraTaskRequiredToast:'Bitte Name und einen gültigen Betrag eingeben',confirmDeleteExtraTask:'Diese Zusatzaufgabe löschen?',
+    entryCompanyLabel:'Firma / Arbeitsplatz (optional)',entryExtraTaskLabel:'🚚 Zusatzaufgabe (optional)',
+    qtyLabel:'Menge',
+    backupTitle:'💾 Datensicherung',
+    backupDesc:'Deine Daten werden automatisch in diesem Browser/Gerät gespeichert und gehen bei einem Seiten-Reload nicht verloren. Falls du aber die Browserdaten löschst oder deine Daten auf ein anderes Gerät/Browser übertragen willst, speichere hier eine Sicherung.',
+    downloadBackupBtn:'⬇ Sicherung herunterladen',restoreBackupBtn:'⬆ Aus Sicherung wiederherstellen',
+    backupDownloadedToast:'Sicherung heruntergeladen ✅',
+    confirmRestoreBackup:'Die Wiederherstellung ersetzt alle aktuellen Daten auf diesem Gerät. Bist du sicher?',
+    restoreSuccessToast:'Erfolgreich wiederhergestellt ✅',
+    restoreErrorMsg:'Datei konnte nicht gelesen werden. Stelle sicher, dass es eine gültige Sicherungsdatei ist',
+    companySpecificSuffix:' (firmenspezifisch)',minutesShort:'Min.',loadToolErrorToast:'Tool konnte nicht geladen werden, bitte Internetverbindung prüfen',
+    nightShiftHint:'🌙 Die Schicht geht bis in den nächsten Tag (wird automatisch berechnet)',
+    companyEveningShiftHint:'🌙 Für eine Abendschicht bis in den nächsten Tag (z. B. von 15:00 bis 01:30), wähle bei "Bis Uhrzeit" einfach die Uhrzeit nach Mitternacht — die App berechnet es automatisch korrekt.',
+    reportCustomTitle:'Alanizi',
+    shiftPresetsTitle:'Meine Standardschicht (Tag / Nacht)',
+    shiftPresetsHint:'Lege hier die Zeiten für jede Schicht fest. Wenn du dann einen Arbeitstag erfasst, kannst du einfach 🌞 oder 🌙 wählen und die Zeit wird automatisch eingetragen.',
+    dayShiftLabel:'🌞 Tagschicht',nightShiftLabel:'🌙 Nachtschicht',
+    shiftSwitchLabel:'Schichtart (optional)',
+    commitUpdateBtn:'💾 Verpflichtung aktualisieren',commitUpdatedToast:'Verpflichtung aktualisiert ✅',
+    incomeUpdateBtn:'💾 Einkommen aktualisieren',incomeUpdatedToast:'Einkommen aktualisiert ✅',thActions:'Aktionen',
+    shiftsMgmtTitle:'🕐 Zusätzliche Schichten (z. B. Spätschicht)',shiftsMgmtDesc:'Füge eine Spätschicht oder eine andere zusätzliche Schicht für eine bestimmte Firma hinzu — beim Erfassen eines Arbeitstages kannst du dann zwischen ihr und der Standardschicht wählen. Eine Schicht, die über Mitternacht geht (z. B. 15:00 bis 01:30), wird automatisch korrekt berechnet.',
+    shiftNameLabel:'Name der Schicht',shiftNamePlaceholder:'z. B.: Spätschicht',
+    defaultShiftLabel:'Standardschicht',shiftLabel:'Schicht',
+    noShiftsYet:'Noch keine zusätzlichen Schichten',shiftRequiredToast:'Bitte Name, Firma und Zeiten der Schicht eingeben',
+    confirmDeleteShift:'Diese Schicht löschen?',
+  }
+};
+let LANG=getSavedLang();
+function getSavedLang(){try{return localStorage.getItem('wt_lang')||'ar';}catch{return 'ar';}}
+const t=k=>I18N[LANG][k];
+function applyLangDOM(){
+  document.documentElement.lang=(LANG==='ar'?'ar':'de');
+  document.documentElement.dir=(LANG==='ar'?'rtl':'ltr');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(I18N[LANG][key]!==undefined)el.textContent=I18N[LANG][key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key=el.getAttribute('data-i18n-placeholder');
+    if(I18N[LANG][key]!==undefined)el.placeholder=I18N[LANG][key];
+  });
+  const lbl=document.getElementById('langBtnLabel');
+  if(lbl)lbl.textContent=(LANG==='ar'?'DE':'AR');
+  const modalBox=document.querySelector('.modal-box');
+  if(modalBox)modalBox.style.direction=(LANG==='ar'?'rtl':'ltr');
+}
+function toggleLang(){
+  LANG=(LANG==='ar'?'de':'ar');
+  try{localStorage.setItem('wt_lang',LANG);}catch{}
+  applyLangDOM();
+  refreshEverything();
+}
+function refreshEverything(){
+  initMonthSel();initPrintMonthSel();initBulkPayMonthSel();
+  renderWeekdays();renderHolLists();renderCompanyNameSettingsList();renderExtraTaskSettingsList();
+  updateCalc();updateHeaderStats();renderRecent();refreshCompanyList();
+  const activeTab=document.querySelector('.tab-panel.active')?.id;
+  if(activeTab==='tab-days'){renderDays(currentFilter);setTimeout(applySalaryVis,50);}
+  if(activeTab==='tab-report')renderReport();
+  if(activeTab==='tab-print')renderPrintView();
+  if(activeTab==='tab-commit')renderCommitments();
+  if(activeTab==='tab-company')renderCompanyView();
+  if(activeTab==='tab-settings')renderSettings();
+}
+
+// ════════════════════════════════════════
+//  DB helpers (localStorage)
+// ════════════════════════════════════════
+const DB={
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}},
+  set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))
+};
+const getEntries=()=>DB.get('wt_entries',[]);
+const saveEntries=e=>DB.set('wt_entries',e);
+const getCommitments=()=>DB.get('wt_commitments',[]);
+const saveCommitments=c=>DB.set('wt_commitments',c);
+const getCompanyNames=()=>DB.get('wt_company_names',[]).map(c=>typeof c==='string'?{name:c,wage:null}:c);
+const saveCompanyNamesDB=c=>DB.set('wt_company_names',c);
+const getExtraTasks=()=>DB.get('wt_extra_tasks',[]);
+const saveExtraTasks=t=>DB.set('wt_extra_tasks',t);
+const getShifts=()=>DB.get('wt_shifts',[]);
+const saveShifts=s=>DB.set('wt_shifts',s);
+const getIncomeList=()=>DB.get('wt_income',[]);
+const saveIncomeList=i=>DB.set('wt_income',i);
+const getSettings=()=>DB.get('wt_settings',{wage:0,workHours:8});
+const saveSettingsDB=s=>DB.set('wt_settings',s);
+const getCustomHols=()=>DB.get('wt_custom_hols',[]);
+const saveCustomHols=h=>DB.set('wt_custom_hols',h);
+const getOffDays=()=>DB.get('wt_offdays',[0,6]);
+const saveOffDays=d=>DB.set('wt_offdays',d);
+// Per-day payment: wt_p_YYYY-MM-DD => {paid:bool, amount:number}
+const getDP=date=>DB.get('wt_p_'+date,{paid:false,amount:0});
+const setDP=(date,obj)=>DB.set('wt_p_'+date,obj);
+
+// ════════════════════════════════════════
+//  GERMAN HOLIDAYS
+// ════════════════════════════════════════
+function easter(y){
+  const a=y%19,b=~~(y/100),c=y%100,d=~~(b/4),e=b%4,
+    f=~~((b+8)/25),g=~~((b-f+1)/3),h=(19*a+b-d-g+15)%30,
+    i=~~(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,
+    m=~~((a+11*h+22*l)/451),
+    mo=~~((h+l-7*m+114)/31),da=(h+l-7*m+114)%31+1;
+  return new Date(y,mo-1,da);
+}
+const adays=(d,n)=>{const r=new Date(d);r.setDate(r.getDate()+n);return r;}
+const fd=d=>d.toISOString().slice(0,10);
+function gHols(y){
+  const e=easter(y);
+  const list=[
+    {date:`${y}-01-01`,nameDe:'Neujahr',nameAr:'رأس السنة'},
+    {date:`${y}-01-06`,nameDe:'Heilige Drei Könige',nameAr:'عيد الملوك'},
+    {date:fd(adays(e,-2)),nameDe:'Karfreitag',nameAr:'الجمعة العظيمة'},
+    {date:fd(adays(e,1)),nameDe:'Ostermontag',nameAr:'إثنين الفصح'},
+    {date:`${y}-05-01`,nameDe:'Tag der Arbeit',nameAr:'عيد العمال'},
+    {date:fd(adays(e,39)),nameDe:'Christi Himmelfahrt',nameAr:'صعود المسيح'},
+    {date:fd(adays(e,50)),nameDe:'Pfingstmontag',nameAr:'إثنين العنصرة'},
+    {date:fd(adays(e,60)),nameDe:'Fronleichnam',nameAr:'عيد الجسد'},
+    {date:`${y}-10-03`,nameDe:'Tag der Deutschen Einheit',nameAr:'يوم الوحدة'},
+    {date:`${y}-11-01`,nameDe:'Allerheiligen',nameAr:'عيد القديسين'},
+    {date:`${y}-12-25`,nameDe:'1. Weihnachtstag',nameAr:'أول الكريسماس'},
+    {date:`${y}-12-26`,nameDe:'2. Weihnachtstag',nameAr:'ثاني الكريسماس'},
+  ];
+  return list.map(h=>({date:h.date,name:LANG==='ar'?h.nameAr:h.nameDe}));
+}
+const isOffDay=date=>getOffDays().includes(new Date(date+'T12:00:00').getDay());
+
+// ════════════════════════════════════════
+//  CALC
+// ════════════════════════════════════════
+function calcHrs(s,e,b){
+  if(!s||!e)return 0;
+  const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);
+  let diff=(eh*60+em)-(sh*60+sm);
+  if(diff<0)diff+=1440; // shift crosses midnight, e.g. 15:00 → 01:30 next day
+  return Math.max(0,+((diff-(b||0))/60).toFixed(2));
+}
+function isNightShift(e){
+  if(!e.start||!e.end)return false;
+  const[sh,sm]=e.start.split(':').map(Number),[eh,em]=e.end.split(':').map(Number);
+  return(eh*60+em)<(sh*60+sm);
+}
+function calcPay(hrs,wage){
+  const w=(wage!==undefined&&wage!==null&&wage!=='')?parseFloat(wage):(getSettings().wage||0);
+  return +((hrs*(w||0)).toFixed(2));
+}
+function extraTaskLabel(e){
+  if(!e.extraTask)return '';
+  const qty=e.extraQty>1?` × ${e.extraQty}`:'';
+  return `${e.extraTask}${qty} (+${(e.extraAmount||0).toFixed(2)}€)`;
+}
+function getCompanyWage(name){
+  if(!name)return null;
+  const c=getCompanyNames().find(x=>x.name===name);
+  return c&&c.wage?c.wage:null;
+}
+function getCompanySchedule(name){
+  if(!name)return null;
+  const c=getCompanyNames().find(x=>x.name===name);
+  if(!c||!c.defStart||!c.defEnd)return null;
+  return{start:c.defStart,end:c.defEnd,brk:c.defBreak};
+}
+function applyCompanySchedule(prefix){
+  const company=document.getElementById(prefix==='entry'?'entryCompany':'editCompany').value;
+  const sched=getCompanySchedule(company);
+  if(!sched)return;
+  document.getElementById(prefix==='entry'?'startTime':'editStart').value=sched.start;
+  document.getElementById(prefix==='entry'?'endTime':'editEnd').value=sched.end;
+  if(sched.brk!=null)document.getElementById(prefix==='entry'?'breakMin':'editBreak').value=sched.brk;
+}
+function applyShiftPreset(prefix,type){
+  const st=getSettings();
+  const startVal=type==='day'?(st.dayShiftStart||'07:00'):(st.nightShiftStart||'15:00');
+  const endVal=type==='day'?(st.dayShiftEnd||'16:00'):(st.nightShiftEnd||'23:30');
+  document.getElementById(prefix==='entry'?'startTime':'editStart').value=startVal;
+  document.getElementById(prefix==='entry'?'endTime':'editEnd').value=endVal;
+  document.getElementById(prefix==='entry'?'entryShiftType':'editShiftType').value=type;
+  updateShiftSwitchUI(prefix,type);
+  if(prefix==='entry')updateCalc();else updEditCalc();
+}
+function updateShiftSwitchUI(prefix,type){
+  const sw=document.getElementById(prefix==='entry'?'entryShiftSwitch':'editShiftSwitch');
+  if(!sw)return;
+  sw.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.shift===type));
+}
+function shiftIcon(e){
+  if(e.shiftType==='day')return '🌞';
+  if(e.shiftType==='night')return '🌙';
+  if(isNightShift(e))return '🌙';
+  return '';
+}
+// Display helper: converts decimal hours (e.g. 7.6667 = 7h40m) into clock-style
+// "H.MM" (e.g. "7.40") so the fraction shown is real minutes-out-of-60, not a
+// decimal fraction of an hour. Only used for on-screen display — calcPay above
+// always uses the true decimal value so wage math stays accurate.
+function fmtHrsClock(decimalHrs){
+  const totalMin=Math.round((decimalHrs||0)*60);
+  const h=Math.floor(totalMin/60),m=totalMin%60;
+  return `${h}.${String(m).padStart(2,'0')}`;
+}
+
+// ════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════
+const dayName=d=>t('weekdaysFull')[new Date(d+'T12:00:00').getDay()];
+const fmtDate=()=>new Date().toISOString().slice(0,10);
+
+function typeBadge(ty){
+  return{work:`<span class="badge bw">${t('typeWork')}</span>`,
+    sick:`<span class="badge bs">${t('typeSickShort')}</span>`,
+    vacation:`<span class="badge bv">${t('typeVacationShort')}</span>`,
+    holiday:`<span class="badge bh">${t('typeHoliday')}</span>`,
+    weekly:`<span class="badge bwk">${t('typeWeekly')}</span>`}[ty]||'';
+}
+
+function payBtn(date,amt,isPaid){
+  return `<button class="paybtn ${isPaid?'paid':'unpaid'}"
+    onclick="togglePay('${date}',${amt})">
+    ${isPaid?t('paidDone'):t('payQuestion')}
+  </button>`;
+}
+
+function showToast(msg,color='var(--green)'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.background=color;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='report')renderReport();
+  if(id==='days'){initBulkPayMonthSel();renderDays('all');setTimeout(applySalaryVis,50);}
+  if(id==='print'){initPrintMonthSel();renderPrintView();}
+  if(id==='commit'){
+    const inD=document.getElementById('inDate');
+    if(inD&&!inD.value)inD.value=fmtDate();
+    renderCommitments();
+  }
+  if(id==='company'){
+    const bd=document.getElementById('bulkAssignDate');
+    if(bd&&!bd.value)bd.value=new Date().getFullYear()+'-08-01';
+    renderCompanyView();
+  }
+  if(id==='settings')renderSettings();
+}
+
+// ════════════════════════════════════════
+//  PAYMENT LOGIC
+// ════════════════════════════════════════
+function togglePay(date,fullAmt){
+  const cur=getDP(date);
+  const nowPaid=!cur.paid;
+  // If marking paid → amount = full salary. If unmarking → amount = 0
+  setDP(date,{paid:nowPaid,amount:nowPaid?fullAmt:0});
+  refreshAll();
+  showToast(nowPaid?t('toastPaymentRecorded'):t('toastPaymentCancelled'),nowPaid?'var(--green)':'var(--yellow)');
+}
+
+// ════════════════════════════════════════
+//  BULK PAYMENT (whole month / multi-select)
+// ════════════════════════════════════════
+function initBulkPayMonthSel(){
+  const mS=document.getElementById('bulkPayMonth'),yS=document.getElementById('bulkPayYear');
+  if(!mS||!yS)return;
+  const curM=mS.value,curY=yS.value;
+  mS.innerHTML='';yS.innerHTML='';
+  t('months').forEach((m,i)=>mS.innerHTML+=`<option value="${i}">${m}</option>`);
+  const now=new Date();
+  mS.value=curM!==''&&curM!==undefined?curM:now.getMonth();
+  const cy=now.getFullYear();
+  for(let y=cy-3;y<=cy+1;y++)yS.innerHTML+=`<option value="${y}">${y}</option>`;
+  yS.value=curY!==''&&curY!==undefined?curY:cy;
+}
+function markWholeMonthPaid(){
+  const mS=document.getElementById('bulkPayMonth'),yS=document.getElementById('bulkPayYear');
+  const m=parseInt(mS.value),y=parseInt(yS.value);
+  const prefix=`${y}-${String(m+1).padStart(2,'0')}`;
+  const monthEntries=getEntries().filter(e=>e.type==='work'&&e.date.startsWith(prefix));
+  if(!monthEntries.length){showToast(t('noWorkDaysInMonthToast'),'var(--yellow)');return;}
+  if(!confirm(t('confirmMarkMonthPaid')(t('months')[m],y)))return;
+  monthEntries.forEach(e=>setDP(e.date,{paid:true,amount:e.pay}));
+  showToast(t('monthMarkedPaidToast')(monthEntries.length));
+  refreshAll();
+}
+let selectionMode=false;
+let selectedDates=new Set();
+function toggleSelectMode(){
+  selectionMode=!selectionMode;
+  const wrap=document.getElementById('daysTableWrap');
+  if(wrap)wrap.classList.toggle('selecting',selectionMode);
+  const bar=document.getElementById('selectModeBar');
+  if(bar)bar.style.display=selectionMode?'inline-block':'none';
+  const btn=document.getElementById('selectModeBtn');
+  if(btn)btn.classList.toggle('active',selectionMode);
+  if(!selectionMode)selectedDates.clear();
+  renderDays(currentFilter);
+  updateSelectCountLabel();
+}
+function updateSelectCountLabel(){
+  const el=document.getElementById('selectCountLabel');
+  if(el)el.textContent=t('selectedCountLabel')(selectedDates.size);
+}
+function toggleDaySelection(date,checked){
+  if(checked)selectedDates.add(date);else selectedDates.delete(date);
+  const row=document.querySelector(`#daysTable tr[data-date="${date}"]`);
+  if(row)row.classList.toggle('row-selected',checked);
+  updateSelectCountLabel();
+}
+function selectAllDays(checked){
+  document.querySelectorAll('#daysTable tr[data-date]').forEach(row=>{
+    const date=row.dataset.date;
+    const cb=row.querySelector('.row-select-cb');
+    if(cb){
+      cb.checked=checked;
+      if(checked)selectedDates.add(date);else selectedDates.delete(date);
+      row.classList.toggle('row-selected',checked);
+    }
+  });
+  const all=document.getElementById('selectAllCheckbox');
+  if(all)all.checked=checked;
+  updateSelectCountLabel();
+}
+function markSelectedPaid(paidBool){
+  if(!selectedDates.size){showToast(t('noDaysSelectedToast'),'var(--yellow)');return;}
+  const count=selectedDates.size;
+  if(!confirm(paidBool?t('confirmMarkSelectedPaid')(count):t('confirmMarkSelectedUnpaid')(count)))return;
+  const entries=getEntries();
+  selectedDates.forEach(date=>{
+    const entry=entries.find(e=>e.date===date&&e.type==='work');
+    if(!entry)return;
+    setDP(date,{paid:paidBool,amount:paidBool?entry.pay:0});
+  });
+  showToast(paidBool?t('toastPaymentRecorded'):t('toastPaymentCancelled'),paidBool?'var(--green)':'var(--yellow)');
+  selectedDates.clear();
+  updateSelectCountLabel();
+  refreshAll();
+}
+
+function refreshAll(){
+  // refresh whichever tabs are visible
+  const activeTab=document.querySelector('.tab-panel.active')?.id;
+  updateHeaderStats();
+  refreshCompanyList();
+  if(activeTab==='tab-days')renderDays(currentFilter);
+  if(activeTab==='tab-report')renderReport();
+  if(activeTab==='tab-entry')renderRecent();
+  if(activeTab==='tab-print')renderPrintView();
+  if(activeTab==='tab-company')renderCompanyView();
+}
+
+// ════════════════════════════════════════
+//  ENTRY FORM
+// ════════════════════════════════════════
+function fillToday(){document.getElementById('entryDate').value=fmtDate();updateCalc();}
+function clearForm(){
+  document.getElementById('entryDate').value='';
+  document.getElementById('startTime').value='07:00';
+  document.getElementById('endTime').value='16:00';
+  document.getElementById('breakMin').value='60';
+  document.getElementById('dayType').value='work';
+  document.getElementById('entryNote').value='';
+  document.getElementById('entryCompany').value='';
+  document.getElementById('entryExtraTask').value='';
+  document.getElementById('entryExtraQty').value='1';
+  document.getElementById('entryShiftType').value='';
+  updateShiftSwitchUI('entry','');
+  refreshExtraTaskSelect('entry');
+  updateCalc();
+}
+function calcExtraAmount(prefix){
+  const taskSel=document.getElementById(prefix==='entry'?'entryExtraTask':'editExtraTask');
+  const qtyInp=document.getElementById(prefix==='entry'?'entryExtraQty':'editExtraQty');
+  if(!taskSel||!taskSel.value)return{amount:0,task:null,qty:0};
+  const task=getExtraTasks().find(x=>x.id===taskSel.value);
+  if(!task)return{amount:0,task:null,qty:0};
+  const qty=Math.max(1,parseInt(qtyInp?.value)||1);
+  return{amount:+((task.amount*qty).toFixed(2)),task,qty};
+}
+function updateCalc(){
+  const s=document.getElementById('startTime').value;
+  const e=document.getElementById('endTime').value;
+  const b=parseInt(document.getElementById('breakMin').value)||0;
+  const company=document.getElementById('entryCompany').value;
+  const wage=getCompanyWage(company);
+  const hrs=calcHrs(s,e,b);
+  const extra=calcExtraAmount('entry');
+  const pay=calcPay(hrs,wage)+extra.amount;
+  const st=getSettings();
+  document.getElementById('calcHours').textContent=fmtHrsClock(hrs);
+  document.getElementById('calcPay').textContent=pay.toFixed(2)+'€';
+  document.getElementById('calcBreak').textContent=b;
+  const effWage=wage||st.wage;
+  document.getElementById('calcWageShow').textContent=effWage?effWage.toFixed(2)+t('perHour')+(wage?t('companySpecificSuffix'):''):t('notSet');
+  const crossesMidnight=s&&e&&(()=>{const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);return(eh*60+em)<(sh*60+sm);})();
+  document.getElementById('nightShiftHint').style.display=crossesMidnight?'block':'none';
+}
+function saveEntry(){
+  const date=document.getElementById('entryDate').value;
+  if(!date){showFB(t('toastPleaseSelectDate'));return;}
+  const start=document.getElementById('startTime').value;
+  const end=document.getElementById('endTime').value;
+  const brk=parseInt(document.getElementById('breakMin').value)||0;
+  const type=document.getElementById('dayType').value;
+  const note=document.getElementById('entryNote').value.trim();
+  const company=document.getElementById('entryCompany').value.trim();
+  const shiftType=document.getElementById('entryShiftType').value;
+  if(isOffDay(date)&&type==='work')
+    if(!confirm(t('confirmOffDay')(dayName(date))))return;
+  const entries=getEntries();
+  const idx=entries.findIndex(e=>e.date===date);
+  const hrs=type==='work'?calcHrs(start,end,brk):0;
+  const wage=getCompanyWage(company);
+  const extra=type==='work'?calcExtraAmount('entry'):{amount:0,task:null,qty:0};
+  const pay=calcPay(hrs,wage)+extra.amount;
+  const rec={date,start,end,brk,type,note,hrs,pay,company,shiftType,
+    extraTask:extra.task?extra.task.name:'',extraAmount:extra.amount,extraQty:extra.qty};
+  if(idx>=0){if(!confirm(t('confirmReplace')))return;entries[idx]=rec;}
+  else entries.push(rec);
+  entries.sort((a,b)=>a.date.localeCompare(b.date));
+  saveEntries(entries);
+  renderRecent();updateHeaderStats();refreshCompanyList();
+  showToast(t('toastSavedSuccess'));hideFB();
+}
+function showFB(msg){const el=document.getElementById('entryFeedback');el.style.display='block';el.style.color='var(--red)';el.textContent=msg;}
+function hideFB(){document.getElementById('entryFeedback').style.display='none';}
+
+// ════════════════════════════════════════
+//  RECENT
+// ════════════════════════════════════════
+function renderRecent(){
+  const entries=getEntries().slice(-5).reverse();
+  const el=document.getElementById('recentEntries');
+  if(!entries.length){el.innerHTML=`<div class="empty"><div class="icon">📭</div><p>${t('noEntriesYet')}</p></div>`;return;}
+  el.innerHTML=entries.map(e=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      padding:8px 11px;margin-bottom:5px;background:var(--bg);border-radius:9px;
+      border:1px solid var(--border);font-size:0.78rem;flex-wrap:wrap;gap:4px;">
+      <span style="color:var(--muted)">${e.date}</span>
+      <span>${dayName(e.date)}</span>
+      ${typeBadge(e.type)}
+      <span style="color:var(--accent2)">${fmtHrsClock(e.hrs)}h</span>
+      <span style="color:var(--green2)">${e.pay.toFixed(2)}€</span>
+      <button class="btn btn-warning btn-sm" onclick="openEdit('${e.date}')">✏️</button>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════
+//  DAYS TAB
+// ════════════════════════════════════════
+let currentFilter='all';
+function filterDays(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderDays(f);
+}
+function renderDays(filter){
+  currentFilter=filter||'all';
+  let entries=getEntries();
+
+  // Compute totals from ALL work entries (not filtered)
+  let totSal=0,totPaid=0;
+  entries.filter(e=>e.type==='work').forEach(e=>{
+    totSal+=e.pay;
+    totPaid+=getDP(e.date).amount||0;
+  });
+  const totRemain=Math.max(0,totSal-totPaid);
+  document.getElementById('dTotalSalary').textContent=totSal.toFixed(2)+'€';
+  document.getElementById('dPaidAmt').textContent=totPaid.toFixed(2)+'€';
+  document.getElementById('dRemainingAmt').textContent=totRemain.toFixed(2)+'€';
+
+  // Apply filter
+  if(filter==='paid') entries=entries.filter(e=>e.type==='work'&&getDP(e.date).paid);
+  else if(filter==='unpaid') entries=entries.filter(e=>e.type==='work'&&!getDP(e.date).paid);
+  else if(filter!=='all') entries=entries.filter(e=>e.type===filter);
+
+  const tbody=document.getElementById('daysTable');
+  const footer=document.getElementById('daysTableFooter');
+  if(!entries.length){
+    tbody.innerHTML=`<tr><td colspan="13" style="text-align:center;padding:30px;color:var(--muted);"><svg width="120" height="76"><use href="#bear-panda-nap"/></svg><div style="margin-top:8px;">${t('noResults')}</div></td></tr>`;
+    if(footer)footer.innerHTML='';
+    return;
+  }
+  const fHrs=entries.reduce((s,e)=>s+(e.hrs||0),0);
+  const fPay=entries.reduce((s,e)=>s+(e.pay||0),0);
+  if(footer)footer.innerHTML=`
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalHoursLabel')}</div><div style="color:var(--accent2)">${fmtHrsClock(fHrs)}</div></div>
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalPayLabel')}</div><div style="color:var(--green2)">${fPay.toFixed(2)}€</div></div>`;
+  tbody.innerHTML=entries.map((e,i)=>{
+    const dp=getDP(e.date);
+    const isWork=e.type==='work';
+    return `<tr class="${dp.paid&&isWork?'row-paid':''} ${selectedDates.has(e.date)?'row-selected':''}" data-date="${e.date}">
+      <td class="sel-col">${isWork?`<input type="checkbox" class="row-select-cb" ${selectedDates.has(e.date)?'checked':''} onchange="toggleDaySelection('${e.date}',this.checked)">`:''}</td>
+      <td style="color:var(--muted2)">${i+1}</td>
+      <td style="white-space:nowrap;font-weight:600">${e.date} ${shiftIcon(e)}</td>
+      <td style="color:var(--muted)">${dayName(e.date)}</td>
+      <td style="color:var(--muted)">${e.start||'–'}</td>
+      <td style="color:var(--muted)">${e.end||'–'}</td>
+      <td style="color:var(--accent2);font-weight:700">${fmtHrsClock(e.hrs)}</td>
+      <td>${typeBadge(e.type)}</td>
+      <td style="color:var(--green2);font-weight:700" title="${extraTaskLabel(e)}"><span class="salary-val">${e.pay.toFixed(2)}€</span>${e.extraTask?' 🚚':''}</td>
+      <td>${isWork?payBtn(e.date,e.pay,dp.paid):'<span style="color:var(--muted2)">–</span>'}</td>
+      <td style="color:var(--muted);font-size:0.76rem;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.note||''}">${e.note||''}</td>
+      <td><button class="btn btn-warning btn-sm" onclick="openEdit('${e.date}')">✏️</button></td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteEntry('${e.date}')">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════
+//  PRINT / SAVE-AS-IMAGE VIEW
+// ════════════════════════════════════════
+let printViewMode='horizontal';
+function setPrintMode(mode){
+  printViewMode=mode;
+  document.getElementById('modeBtnH').classList.toggle('active',mode==='horizontal');
+  document.getElementById('modeBtnV').classList.toggle('active',mode==='vertical');
+  renderPrintView();
+}
+function initPrintMonthSel(){
+  const mS=document.getElementById('printMonth'),yS=document.getElementById('printYear');
+  if(!mS||!yS)return;
+  const curM=mS.value,curY=yS.value;
+  mS.innerHTML='';yS.innerHTML='';
+  t('months').forEach((m,i)=>mS.innerHTML+=`<option value="${i}">${m}</option>`);
+  const now=new Date();
+  mS.value=curM!==''&&curM!==undefined?curM:now.getMonth();
+  const cy=now.getFullYear();
+  for(let y=cy-3;y<=cy+1;y++)yS.innerHTML+=`<option value="${y}">${y}</option>`;
+  yS.value=curY!==''&&curY!==undefined?curY:cy;
+}
+function changePrintMonth(d){
+  const mS=document.getElementById('printMonth'),yS=document.getElementById('printYear');
+  let m=parseInt(mS.value)+d,y=parseInt(yS.value);
+  if(m<0){m=11;y--;}if(m>11){m=0;y++;}
+  mS.value=m;yS.value=y;renderPrintView();
+}
+function printColHTML(days){
+  if(!days.length)return '<div class="print-col"></div>';
+  const cells=days.map(e=>`
+      <div class="print-cell">
+        <div class="print-day">${dayName(e.date)}</div>
+        <div class="print-date">${e.date} ${shiftIcon(e)}</div>
+      </div>
+      <div class="print-hrs">${fmtHrsClock(e.hrs)}</div>`).join('');
+  return `<div class="print-col">
+    <div class="print-grid-head">
+      <div>${t('dayDateHeader')}</div><div>${t('thHours')}</div>
+    </div>
+    <div class="print-grid">${cells}</div>
+  </div>`;
+}
+function renderPrintView(){
+  const mS=document.getElementById('printMonth'),yS=document.getElementById('printYear');
+  if(mS&&!mS.options.length)initPrintMonthSel();
+  const m=mS?parseInt(mS.value):new Date().getMonth();
+  const y=yS?parseInt(yS.value):new Date().getFullYear();
+  const prefix=`${y}-${String(m+1).padStart(2,'0')}`;
+  const q=(document.getElementById('printSearch')?.value||'').trim().toLowerCase();
+
+  let entries=getEntries().filter(e=>e.type==='work'&&e.date.startsWith(prefix));
+  if(q)entries=entries.filter(e=>e.date.toLowerCase().includes(q)||dayName(e.date).toLowerCase().includes(q));
+  // strict chronological order, exactly the entered days — nothing skipped, nothing invented
+  entries=entries.slice().sort((a,b)=>a.date.localeCompare(b.date));
+
+  const groupsEl=document.getElementById('printGroups');
+  const metaEl=document.getElementById('printMeta');
+  const footerEl=document.getElementById('printTotalFooter');
+  const monthLabel=(t('months')||[])[m]||'';
+  if(!entries.length){
+    groupsEl.innerHTML=`<div class="empty"><div class="icon">📭</div><p>${t('noResults')}</p></div>`;
+    metaEl.textContent=`${monthLabel} ${y}`;
+    footerEl.textContent='';
+    return;
+  }
+  const totalHrs=entries.reduce((s,e)=>s+e.hrs,0);
+  metaEl.textContent=`${monthLabel} ${y}  •  ${t('workDaysCountLabel')}: ${entries.length}`;
+  footerEl.innerHTML=`${t('totalHoursLabel')}: <span style="color:var(--green2);font-size:1.05rem;">${fmtHrsClock(totalHrs)}</span>`;
+  const perPage=30; // 15 rows × 2 sections
+  let html='';
+  for(let p=0;p*perPage<entries.length;p++){
+    const page=entries.slice(p*perPage,p*perPage+perPage);
+    let colA,colB;
+    if(printViewMode==='vertical'){
+      // sequential: section 1 = days 1-15, section 2 = days 16-30
+      colA=page.slice(0,15);colB=page.slice(15,30);
+    }else{
+      // horizontal: day1→section1 row1, day2→section2 row1, day3→section1 row2, ...
+      colA=[];colB=[];
+      page.forEach((e,idx)=>(idx%2===0?colA:colB).push(e));
+    }
+    html+=`<div class="print-row">${printColHTML(colA)}${printColHTML(colB)}</div>`;
+  }
+  groupsEl.innerHTML=html;
+}
+let h2cLoading=null;
+function loadHtml2Canvas(cb){
+  if(typeof html2canvas!=='undefined'){cb();return;}
+  if(h2cLoading){h2cLoading.then(cb);return;}
+  h2cLoading=new Promise(resolve=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=resolve;
+    s.onerror=()=>{showToast(t('loadToolErrorToast'),'var(--red)');};
+    document.head.appendChild(s);
+  });
+  h2cLoading.then(cb);
+}
+function saveDaysAsImage(){
+  renderPrintView();
+  loadHtml2Canvas(()=>{
+    const el=document.getElementById('printCapture');
+    html2canvas(el,{backgroundColor:'#0a0f1e',scale:2}).then(canvas=>{
+      const link=document.createElement('a');
+      link.download=(LANG==='ar'?'ايام-العمل-':'Arbeitstage-')+fmtDate()+'.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+      showToast(t('imageSavedToast'));
+    }).catch(()=>showToast(t('imageSaveErrorToast'),'var(--red)'));
+  });
+}
+
+// ════════════════════════════════════════
+//  REPORT TAB
+// ════════════════════════════════════════
+function initMonthSel(){
+  const mS=document.getElementById('reportMonth'),yS=document.getElementById('reportYear');
+  const curM=mS.value,curY=yS.value;
+  mS.innerHTML='';yS.innerHTML='';
+  t('months').forEach((m,i)=>mS.innerHTML+=`<option value="${i}">${m}</option>`);
+  const now=new Date();mS.value=curM!==''&&curM!==undefined?curM:now.getMonth();
+  const cy=now.getFullYear();
+  for(let y=cy-3;y<=cy+1;y++)yS.innerHTML+=`<option value="${y}">${y}</option>`;
+  yS.value=curY!==''&&curY!==undefined?curY:cy;
+}
+function changeMonth(d){
+  const mS=document.getElementById('reportMonth'),yS=document.getElementById('reportYear');
+  let m=parseInt(mS.value)+d,y=parseInt(yS.value);
+  if(m<0){m=11;y--;}if(m>11){m=0;y++;}
+  mS.value=m;yS.value=y;renderReport();
+}
+function renderReport(){
+  const m=parseInt(document.getElementById('reportMonth').value);
+  const y=parseInt(document.getElementById('reportYear').value);
+  const prefix=`${y}-${String(m+1).padStart(2,'0')}`;
+  const entries=getEntries().filter(e=>e.date.startsWith(prefix));
+
+  let totalHrs=0,totalPay=0,workDays=0,paidAmt=0;
+  entries.forEach(e=>{
+    if(e.type==='work'){
+      workDays++;totalHrs+=e.hrs;totalPay+=e.pay;
+      paidAmt+=getDP(e.date).amount||0;
+    }
+  });
+  const remaining=Math.max(0,totalPay-paidAmt);
+
+  document.getElementById('monthlySalary').textContent=totalPay.toFixed(2)+' €';
+  document.getElementById('mDays').textContent=workDays;
+  document.getElementById('mHours').textContent=fmtHrsClock(totalHrs);
+  document.getElementById('mTotalSalary').textContent=totalPay.toFixed(2)+'€';
+  document.getElementById('mPaidAmt').textContent=paidAmt.toFixed(2)+'€';
+  document.getElementById('mUnpaidAmt').textContent=remaining.toFixed(2)+'€';
+
+  const tbody=document.getElementById('reportTable');
+  const footer=document.getElementById('reportTableFooter');
+  if(!entries.length){
+    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--muted);">${t('noData')}</td></tr>`;
+    if(footer)footer.innerHTML='';
+    return;
+  }
+  if(footer)footer.innerHTML=`
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalHoursLabel')}</div><div style="color:var(--accent2)">${fmtHrsClock(totalHrs)}</div></div>
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalPayLabel')}</div><div style="color:var(--green2)">${totalPay.toFixed(2)}€</div></div>`;
+  tbody.innerHTML=entries.map(e=>{
+    const dp=getDP(e.date);
+    const isWork=e.type==='work';
+    return `<tr class="${dp.paid&&isWork?'row-paid':''}">
+      <td style="white-space:nowrap;font-weight:600">${e.date} ${shiftIcon(e)}</td>
+      <td>${dayName(e.date)}</td>
+      <td style="color:var(--muted)">${e.start||'–'}</td>
+      <td style="color:var(--muted)">${e.end||'–'}</td>
+      <td style="color:var(--accent2);font-weight:700">${fmtHrsClock(e.hrs)}</td>
+      <td>${typeBadge(e.type)}</td>
+      <td style="color:var(--green2);font-weight:700" title="${extraTaskLabel(e)}">${e.pay.toFixed(2)}€${e.extraTask?' 🚚':''}</td>
+      <td>${isWork?payBtn(e.date,e.pay,dp.paid):'<span style="color:var(--muted2)">–</span>'}</td>
+      <td style="color:var(--muted);font-size:0.76rem;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.note||''}</td>
+      <td><button class="btn btn-warning btn-sm" onclick="openEdit('${e.date}')">✏️</button></td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteEntry('${e.date}')">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════
+//  COMMITMENTS TAB
+// ════════════════════════════════════════
+function commitTypeLabel(type){
+  const map={rent:'commitTypeRent',debt:'commitTypeDebt',subscription:'commitTypeSubscription',bill:'commitTypeBill',other:'commitTypeOther'};
+  return map[type]?t(map[type]):type;
+}
+let editingCommitmentId=null,editingIncomeId=null;
+function saveCommitment(){
+  const name=document.getElementById('cmName').value.trim();
+  const amount=parseFloat(document.getElementById('cmAmount').value);
+  const type=document.getElementById('cmType').value;
+  const note=document.getElementById('cmNote').value.trim();
+  const fb=document.getElementById('commitFeedback');
+  if(!name||!amount||amount<=0){
+    fb.style.display='block';fb.style.color='var(--red)';
+    fb.textContent=t('commitNameAmountError');
+    return;
+  }
+  const list=getCommitments();
+  const wasEditing=!!editingCommitmentId;
+  if(wasEditing){
+    const idx=list.findIndex(c=>c.id===editingCommitmentId);
+    if(idx>=0)list[idx]={...list[idx],name,amount,type,note};
+  }else{
+    list.push({id:Date.now().toString(36),name,amount,type,note});
+  }
+  saveCommitments(list);
+  clearCommitForm();
+  fb.style.display='none';
+  renderCommitments();
+  showToast(wasEditing?t('commitUpdatedToast'):t('commitSavedToast'));
+}
+function editCommitment(id){
+  const c=getCommitments().find(x=>x.id===id);
+  if(!c)return;
+  document.getElementById('cmName').value=c.name;
+  document.getElementById('cmAmount').value=c.amount;
+  document.getElementById('cmType').value=c.type;
+  document.getElementById('cmNote').value=c.note||'';
+  editingCommitmentId=id;
+  document.getElementById('commitSaveButton').textContent=t('commitUpdateBtn');
+  document.getElementById('cmName').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function clearCommitForm(){
+  document.getElementById('cmName').value='';
+  document.getElementById('cmAmount').value='';
+  document.getElementById('cmType').value='rent';
+  document.getElementById('cmNote').value='';
+  editingCommitmentId=null;
+  const btn=document.getElementById('commitSaveButton');
+  if(btn)btn.textContent=t('commitSaveBtn');
+}
+function deleteCommitment(id){
+  if(!confirm(t('confirmDeleteCommitment')))return;
+  saveCommitments(getCommitments().filter(c=>c.id!==id));
+  if(editingCommitmentId===id)clearCommitForm();
+  renderCommitments();
+  showToast(t('toastDeleted'),'var(--red)');
+}
+function saveIncome(){
+  const date=document.getElementById('inDate').value||fmtDate();
+  const amount=parseFloat(document.getElementById('inAmount').value);
+  const note=document.getElementById('inNote').value.trim();
+  const fb=document.getElementById('incomeFeedback');
+  if(!amount||amount<=0){
+    fb.style.display='block';fb.style.color='var(--red)';
+    fb.textContent=t('incomeAmountError');
+    return;
+  }
+  const list=getIncomeList();
+  const wasEditing=!!editingIncomeId;
+  if(wasEditing){
+    const idx=list.findIndex(i=>i.id===editingIncomeId);
+    if(idx>=0)list[idx]={...list[idx],date,amount,note};
+  }else{
+    list.push({id:Date.now().toString(36),date,amount,note});
+  }
+  saveIncomeList(list);
+  clearIncomeForm();
+  fb.style.display='none';
+  renderCommitments();
+  showToast(wasEditing?t('incomeUpdatedToast'):t('incomeSavedToast'));
+}
+function editIncome(id){
+  const i=getIncomeList().find(x=>x.id===id);
+  if(!i)return;
+  document.getElementById('inDate').value=i.date;
+  document.getElementById('inAmount').value=i.amount;
+  document.getElementById('inNote').value=i.note||'';
+  editingIncomeId=id;
+  document.getElementById('incomeSaveButton').textContent=t('incomeUpdateBtn');
+  document.getElementById('inAmount').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function clearIncomeForm(){
+  document.getElementById('inDate').value=fmtDate();
+  document.getElementById('inAmount').value='';
+  document.getElementById('inNote').value='';
+  editingIncomeId=null;
+  const btn=document.getElementById('incomeSaveButton');
+  if(btn)btn.textContent=t('incomeSaveBtn');
+}
+function deleteIncome(id){
+  if(!confirm(t('confirmDeleteIncome')))return;
+  saveIncomeList(getIncomeList().filter(i=>i.id!==id));
+  if(editingIncomeId===id)clearIncomeForm();
+  renderCommitments();
+  showToast(t('toastDeleted'),'var(--red)');
+}
+function initIncomeMonthSel(){
+  const mS=document.getElementById('incomeMonth'),yS=document.getElementById('incomeYear');
+  if(!mS||!yS)return;
+  const curM=mS.value,curY=yS.value;
+  mS.innerHTML='';yS.innerHTML='';
+  t('months').forEach((m,i)=>mS.innerHTML+=`<option value="${i}">${m}</option>`);
+  const now=new Date();
+  mS.value=curM!==''&&curM!==undefined?curM:now.getMonth();
+  const cy=now.getFullYear();
+  for(let y=cy-3;y<=cy+1;y++)yS.innerHTML+=`<option value="${y}">${y}</option>`;
+  yS.value=curY!==''&&curY!==undefined?curY:cy;
+}
+function changeIncomeMonth(d){
+  const mS=document.getElementById('incomeMonth'),yS=document.getElementById('incomeYear');
+  let m=parseInt(mS.value)+d,y=parseInt(yS.value);
+  if(m<0){m=11;y--;}if(m>11){m=0;y++;}
+  mS.value=m;yS.value=y;renderCommitments();
+}
+function renderCommitments(){
+  initIncomeMonthSel();
+  const list=getCommitments();
+  const commitBody=document.getElementById('commitTable');
+  const totalObligations=list.reduce((s,c)=>s+c.amount,0);
+
+  // selected month's manually entered income
+  const mS=document.getElementById('incomeMonth'),yS=document.getElementById('incomeYear');
+  const selM=parseInt(mS.value)+1,selY=parseInt(yS.value);
+  const prefix=`${selY}-${String(selM).padStart(2,'0')}`;
+  const incomeList=getIncomeList().filter(i=>i.date&&i.date.startsWith(prefix)).sort((a,b)=>b.date.localeCompare(a.date));
+  const income=incomeList.reduce((s,i)=>s+i.amount,0);
+  const net=income-totalObligations;
+
+  document.getElementById('cmIncome').textContent=income.toFixed(2)+'€';
+  document.getElementById('cmTotalObligations').textContent=totalObligations.toFixed(2)+'€';
+  const netEl=document.getElementById('cmNet');
+  netEl.textContent=net.toFixed(2)+'€';
+  netEl.style.color=net<0?'#fca5a5':'var(--accent2)';
+
+  if(!list.length){
+    commitBody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--muted);">${t('noCommitmentsYet')}</td></tr>`;
+    document.getElementById('commitTotalFooter').innerHTML='';
+  }else{
+    commitBody.innerHTML=list.map(c=>`<tr>
+      <td style="font-weight:600">${c.name}</td>
+      <td>${commitTypeLabel(c.type)}</td>
+      <td style="color:#fca5a5;font-weight:700">${c.amount.toFixed(2)}€</td>
+      <td style="color:var(--muted);font-size:0.76rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.note||''}">${c.note||''}</td>
+      <td class="action-col"><button class="btn btn-outline btn-sm" onclick="editCommitment('${c.id}')" style="margin-inline-end:5px;">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteCommitment('${c.id}')">🗑</button></td>
+    </tr>`).join('');
+    document.getElementById('commitTotalFooter').innerHTML=
+      `<div class="ttf-item"><div class="ttf-lbl">${t('totalObligations')}</div><div style="color:#fca5a5">${totalObligations.toFixed(2)}€</div></div>`;
+  }
+
+  const incomeBody=document.getElementById('incomeTable');
+  if(!incomeList.length){
+    incomeBody.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--muted);">${t('noIncomeYet')}</td></tr>`;
+    document.getElementById('incomeTotalFooter').innerHTML='';
+  }else{
+    incomeBody.innerHTML=incomeList.map(i=>`<tr>
+      <td style="font-weight:600;white-space:nowrap">${i.date}</td>
+      <td style="color:var(--green2);font-weight:700">${i.amount.toFixed(2)}€</td>
+      <td style="color:var(--muted);font-size:0.76rem;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${i.note||''}">${i.note||''}</td>
+      <td class="action-col"><button class="btn btn-outline btn-sm" onclick="editIncome('${i.id}')" style="margin-inline-end:5px;">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteIncome('${i.id}')">🗑</button></td>
+    </tr>`).join('');
+    document.getElementById('incomeTotalFooter').innerHTML=
+      `<div class="ttf-item"><div class="ttf-lbl">${t('totalIncomeLabel')}</div><div style="color:var(--green2)">${income.toFixed(2)}€</div></div>`;
+  }
+}
+function saveCommitmentsAsImage(){
+  renderCommitments();
+  loadHtml2Canvas(()=>{
+    const el=document.getElementById('commitCapture');
+    el.classList.add('hide-actions');
+    html2canvas(el,{backgroundColor:'#0a0f1e',scale:2}).then(canvas=>{
+      el.classList.remove('hide-actions');
+      const link=document.createElement('a');
+      link.download=(LANG==='ar'?'التزاماتي-':'Verpflichtungen-')+fmtDate()+'.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+      showToast(t('imageSavedToast'));
+    }).catch(()=>{el.classList.remove('hide-actions');showToast(t('imageSaveErrorToast'),'var(--red)');});
+  });
+}
+function saveCommitTableAsImage(){
+  renderCommitments();
+  loadHtml2Canvas(()=>{
+    const el=document.getElementById('commitTableCapture');
+    el.classList.add('hide-actions');
+    html2canvas(el,{backgroundColor:'#0a0f1e',scale:2}).then(canvas=>{
+      el.classList.remove('hide-actions');
+      const link=document.createElement('a');
+      link.download=(LANG==='ar'?'جدول-الالتزامات-':'Verpflichtungstabelle-')+fmtDate()+'.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+      showToast(t('imageSavedToast'));
+    }).catch(()=>{el.classList.remove('hide-actions');showToast(t('imageSaveErrorToast'),'var(--red)');});
+  });
+}
+function saveIncomeTableAsImage(){
+  renderCommitments();
+  loadHtml2Canvas(()=>{
+    const el=document.getElementById('incomeTableCapture');
+    el.classList.add('hide-actions');
+    html2canvas(el,{backgroundColor:'#0a0f1e',scale:2}).then(canvas=>{
+      el.classList.remove('hide-actions');
+      const link=document.createElement('a');
+      link.download=(LANG==='ar'?'جدول-الدخل-':'Einkommenstabelle-')+fmtDate()+'.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+      showToast(t('imageSavedToast'));
+    }).catch(()=>{el.classList.remove('hide-actions');showToast(t('imageSaveErrorToast'),'var(--red)');});
+  });
+}
+
+// ════════════════════════════════════════
+//  BY-COMPANY VIEW
+// ════════════════════════════════════════
+function addCompanyName(){
+  const nameInp=document.getElementById('newCompanyName');
+  const wageInp=document.getElementById('newCompanyWage');
+  const startInp=document.getElementById('newCompanyStart');
+  const endInp=document.getElementById('newCompanyEnd');
+  const brkInp=document.getElementById('newCompanyBreak');
+  const name=nameInp.value.trim();
+  const wage=wageInp.value?parseFloat(wageInp.value):null;
+  const defStart=startInp.value||null;
+  const defEnd=endInp.value||null;
+  const defBreak=brkInp.value?parseInt(brkInp.value):null;
+  if(!name){showToast(t('companyNameRequiredToast'),'var(--yellow)');return;}
+  const list=getCompanyNames();
+  if(list.some(c=>c.name.toLowerCase()===name.toLowerCase())){showToast(t('companyExistsToast'),'var(--yellow)');return;}
+  list.push({name,wage,defStart,defEnd,defBreak});
+  list.sort((a,b)=>a.name.localeCompare(b.name,LANG));
+  saveCompanyNamesDB(list);
+  nameInp.value='';wageInp.value='';startInp.value='';endInp.value='';brkInp.value='';
+  renderCompanyNameSettingsList();
+  refreshCompanyList();
+  showToast(t('genericAddedToast'));
+}
+function deleteCompanyName(name){
+  if(!confirm(t('confirmDeleteCompanyPrefix')(name)))return;
+  saveCompanyNamesDB(getCompanyNames().filter(c=>c.name!==name));
+  saveExtraTasks(getExtraTasks().filter(x=>x.company!==name));
+  renderCompanyNameSettingsList();
+  refreshCompanyList();
+  showToast(t('toastDeleted'),'var(--red)');
+}
+function renderCompanyNameSettingsList(){
+  const el=document.getElementById('companyNameList');
+  if(!el)return;
+  const list=getCompanyNames();
+  el.innerHTML=!list.length
+    ?`<li style="color:var(--muted);font-size:0.8rem;border:none">${t('noNamesYet')}</li>`
+    :list.map(c=>{
+      const sched=(c.defStart&&c.defEnd)?`<span style="color:var(--accent2);font-size:0.7rem"> — ${c.defStart}-${c.defEnd}${c.defBreak?', '+t('breakWordShort')+' '+c.defBreak+t('minutesShort'):''}</span>`:'';
+      return `<li><span>${c.name} ${c.wage?`<span style="color:var(--green2);font-size:0.72rem">(${c.wage.toFixed(2)}${t('perHour')})</span>`:''}${sched}</span>
+      <button class="del-btn" onclick="deleteCompanyName('${c.name.replace(/'/g,"\\'")}')">${t('deleteWord')}</button></li>`;
+    }).join('');
+}
+function refreshCompanyList(){
+  const list=getCompanyNames();
+  const names=list.map(c=>c.name);
+  ['entryCompany','editCompany'].forEach(id=>{
+    const sel=document.getElementById(id);
+    if(!sel)return;
+    const cur=sel.value;
+    sel.innerHTML=`<option value="">${t('withoutOption')}</option>`+names.map(n=>`<option value="${n}">${n}</option>`).join('');
+    if(names.includes(cur))sel.value=cur;
+    sel.onchange=sel.id==='entryCompany'
+      ?()=>{applyCompanySchedule('entry');updateCalc();refreshExtraTaskSelect('entry');}
+      :()=>{applyCompanySchedule('edit');updEditCalc();refreshExtraTaskSelect('edit');};
+  });
+  const sel=document.getElementById('companySelect');
+  if(sel){
+    const cur=sel.value;
+    if(!names.length){
+      sel.innerHTML=`<option value="">${t('noCompanyNamesYet')}</option>`;
+    }else{
+      sel.innerHTML=names.map(n=>`<option value="${n}">${n}</option>`).join('');
+      if(names.includes(cur))sel.value=cur;
+    }
+  }
+  const taskCoSel=document.getElementById('newTaskCompany');
+  if(taskCoSel){
+    const cur=taskCoSel.value;
+    taskCoSel.innerHTML=`<option value="">${t('allCompaniesOption')}</option>`+names.map(n=>`<option value="${n}">${n}</option>`).join('');
+    if(names.includes(cur))taskCoSel.value=cur;
+  }
+  const bulkSel=document.getElementById('bulkAssignCompany');
+  if(bulkSel){
+    const cur=bulkSel.value;
+    bulkSel.innerHTML=names.length
+      ?names.map(n=>`<option value="${n}">${n}</option>`).join('')
+      :`<option value="">${t('noCompanyNamesYet')}</option>`;
+    if(names.includes(cur))bulkSel.value=cur;
+  }
+  refreshExtraTaskSelect('entry');refreshExtraTaskSelect('edit');
+}
+function bulkAssignCompanyToEntries(){
+  const company=document.getElementById('bulkAssignCompany').value;
+  const dir=document.getElementById('bulkAssignDir').value;
+  const cutoff=document.getElementById('bulkAssignDate').value;
+  const fb=document.getElementById('bulkAssignFeedback');
+  if(!company||!cutoff){
+    fb.style.display='block';fb.style.color='var(--red)';
+    fb.textContent=t('bulkMissingError');
+    return;
+  }
+  const dirLabel=dir==='before'?t('dirBeforeShort'):t('dirAfterShort');
+  if(!confirm(t('bulkConfirmPrefix')(company,dirLabel,cutoff)))return;
+  const entries=getEntries();
+  let count=0;
+  entries.forEach(e=>{
+    const match=dir==='before'?e.date<cutoff:e.date>=cutoff;
+    if(match){e.company=company;count++;}
+  });
+  saveEntries(entries);
+  refreshAll();refreshCompanyList();
+  fb.style.display='block';fb.style.color='var(--green2)';
+  fb.textContent=t('bulkUpdatedToast')(count);
+  showToast(t('bulkUpdatedToast')(count));
+}
+
+// ════════════════════════════════════════
+//  EXTRA TASKS (e.g. container unloading)
+// ════════════════════════════════════════
+function addExtraTask(){
+  const nameInp=document.getElementById('newTaskName');
+  const amountInp=document.getElementById('newTaskAmount');
+  const coSel=document.getElementById('newTaskCompany');
+  const name=nameInp.value.trim();
+  const amount=parseFloat(amountInp.value);
+  const company=coSel.value;
+  if(!name||!amount||amount<=0){showToast(t('extraTaskRequiredToast'),'var(--yellow)');return;}
+  const list=getExtraTasks();
+  list.push({id:Date.now().toString(36),name,amount,company});
+  saveExtraTasks(list);
+  nameInp.value='';amountInp.value='';coSel.value='';
+  renderExtraTaskSettingsList();
+  refreshExtraTaskSelect('entry');refreshExtraTaskSelect('edit');
+  showToast(t('genericAddedToast'));
+}
+function deleteExtraTask(id){
+  if(!confirm(t('confirmDeleteExtraTask')))return;
+  saveExtraTasks(getExtraTasks().filter(x=>x.id!==id));
+  renderExtraTaskSettingsList();
+  refreshExtraTaskSelect('entry');refreshExtraTaskSelect('edit');
+  showToast(t('toastDeleted'),'var(--red)');
+}
+function renderExtraTaskSettingsList(){
+  const el=document.getElementById('extraTaskList');
+  if(!el)return;
+  const list=getExtraTasks();
+  el.innerHTML=!list.length
+    ?`<li style="color:var(--muted);font-size:0.8rem;border:none">${t('noExtraTasksYet')}</li>`
+    :list.map(x=>`<li><span>${x.name} <span style="color:var(--green2);font-size:0.72rem">(+${x.amount.toFixed(2)}€)</span>
+      ${x.company?`<span style="color:var(--muted);font-size:0.7rem"> — ${x.company}</span>`:`<span style="color:var(--muted);font-size:0.7rem"> — ${t('allCompaniesOption')}</span>`}</span>
+      <button class="del-btn" onclick="deleteExtraTask('${x.id}')">${t('deleteWord')}</button></li>`).join('');
+}
+function refreshExtraTaskSelect(prefix){
+  const coSel=document.getElementById(prefix==='entry'?'entryCompany':'editCompany');
+  const taskSel=document.getElementById(prefix==='entry'?'entryExtraTask':'editExtraTask');
+  if(!taskSel)return;
+  const company=coSel?coSel.value:'';
+  const tasks=getExtraTasks().filter(x=>!x.company||x.company===company);
+  const cur=taskSel.value;
+  taskSel.innerHTML=`<option value="">${t('withoutOption')}</option>`+
+    tasks.map(x=>`<option value="${x.id}">${x.name} (+${x.amount.toFixed(2)}€)</option>`).join('');
+  if(tasks.some(x=>x.id===cur))taskSel.value=cur;else taskSel.value='';
+}
+function renderCompanyView(){
+  refreshCompanyList();
+  const sel=document.getElementById('companySelect');
+  const company=sel?sel.value:'';
+  const tbody=document.getElementById('companyTable');
+  const footer=document.getElementById('companyTableFooter');
+  if(!company){
+    tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);">${t('noData')}</td></tr>`;
+    document.getElementById('coDays').textContent='0';
+    document.getElementById('coHours').textContent='0.00';
+    document.getElementById('coPay').textContent='0.00€';
+    if(footer)footer.innerHTML='';
+    return;
+  }
+  const entries=getEntries().filter(e=>e.type==='work'&&(e.company||'').trim()===company)
+    .sort((a,b)=>a.date.localeCompare(b.date));
+  const totalHrs=entries.reduce((s,e)=>s+e.hrs,0);
+  const totalPay=entries.reduce((s,e)=>s+e.pay,0);
+  document.getElementById('coDays').textContent=entries.length;
+  document.getElementById('coHours').textContent=fmtHrsClock(totalHrs);
+  document.getElementById('coPay').textContent=totalPay.toFixed(2)+'€';
+  if(!entries.length){
+    tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);">${t('noWorkDaysForCompany')}</td></tr>`;
+    if(footer)footer.innerHTML='';
+    return;
+  }
+  if(footer)footer.innerHTML=`
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalHoursLabel')}</div><div style="color:var(--accent2)">${fmtHrsClock(totalHrs)}</div></div>
+    <div class="ttf-item"><div class="ttf-lbl">${t('totalPayLabel')}</div><div style="color:var(--green2)">${totalPay.toFixed(2)}€</div></div>`;
+  tbody.innerHTML=entries.map(e=>`<tr>
+      <td style="white-space:nowrap;font-weight:600">${e.date} ${shiftIcon(e)}</td>
+      <td style="color:var(--muted)">${dayName(e.date)}</td>
+      <td style="color:var(--muted)">${e.start||'–'}</td>
+      <td style="color:var(--muted)">${e.end||'–'}</td>
+      <td style="color:var(--accent2);font-weight:700">${fmtHrsClock(e.hrs)}</td>
+      <td style="color:var(--green2);font-weight:700" title="${extraTaskLabel(e)}">${e.pay.toFixed(2)}€${e.extraTask?' 🚚':''}</td>
+      <td style="color:var(--muted);font-size:0.76rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.note||''}">${e.note||''}</td>
+    </tr>`).join('');
+}
+
+function deleteEntry(date){
+  if(!confirm(t('confirmDelete')(date)))return;
+  saveEntries(getEntries().filter(e=>e.date!==date));
+  refreshAll();renderRecent();
+  showToast(t('toastDeleted'),'var(--red)');
+}
+
+// ════════════════════════════════════════
+//  EDIT MODAL
+// ════════════════════════════════════════
+function openEdit(date){
+  const e=getEntries().find(x=>x.date===date);
+  if(!e)return;
+  document.getElementById('editDate').value=date;
+  document.getElementById('editDateLabel').textContent=date+' '+dayName(date);
+  document.getElementById('editStart').value=e.start||'07:00';
+  document.getElementById('editEnd').value=e.end||'16:00';
+  document.getElementById('editBreak').value=e.brk??60;
+  document.getElementById('editType').value=e.type||'work';
+  document.getElementById('editNote').value=e.note||'';
+  document.getElementById('editCompany').value=e.company||'';
+  refreshExtraTaskSelect('edit');
+  const matchTask=e.extraTask?getExtraTasks().find(x=>x.name===e.extraTask&&(!x.company||x.company===e.company)):null;
+  document.getElementById('editExtraTask').value=matchTask?matchTask.id:'';
+  document.getElementById('editExtraQty').value=e.extraQty||1;
+  document.getElementById('editShiftType').value=e.shiftType||'';
+  updateShiftSwitchUI('edit',e.shiftType||'');
+  updEditCalc();
+  document.getElementById('editModal').style.display='flex';
+}
+function maybeCloseModal(ev){if(ev.target===document.getElementById('editModal'))closeModal();}
+function closeModal(){document.getElementById('editModal').style.display='none';}
+function updEditCalc(){
+  const s=document.getElementById('editStart').value;
+  const e=document.getElementById('editEnd').value;
+  const b=parseInt(document.getElementById('editBreak').value)||0;
+  const ty=document.getElementById('editType').value;
+  const company=document.getElementById('editCompany').value;
+  const wage=getCompanyWage(company);
+  const hrs=ty==='work'?calcHrs(s,e,b):0;
+  const extra=ty==='work'?calcExtraAmount('edit'):{amount:0,task:null,qty:0};
+  const pay=calcPay(hrs,wage)+extra.amount;
+  document.getElementById('editCalcInfo').innerHTML=
+    `${t('hoursShort')} <strong style="color:var(--accent2)">${fmtHrsClock(hrs)}</strong> &nbsp;|&nbsp; ${t('payShort')} <strong style="color:var(--green2)">${pay.toFixed(2)}€</strong>`;
+  const crossesMidnight=s&&e&&(()=>{const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);return(eh*60+em)<(sh*60+sm);})();
+  document.getElementById('editNightShiftHint').style.display=crossesMidnight?'block':'none';
+}
+['editStart','editEnd','editBreak','editType'].forEach(id=>{
+  document.getElementById(id)?.addEventListener('input',updEditCalc);
+});
+function saveEdit(){
+  const date=document.getElementById('editDate').value;
+  const start=document.getElementById('editStart').value;
+  const end=document.getElementById('editEnd').value;
+  const brk=parseInt(document.getElementById('editBreak').value)||0;
+  const type=document.getElementById('editType').value;
+  const note=document.getElementById('editNote').value.trim();
+  const company=document.getElementById('editCompany').value.trim();
+  const shiftType=document.getElementById('editShiftType').value;
+  const entries=getEntries();
+  const idx=entries.findIndex(e=>e.date===date);
+  if(idx<0){showToast(t('toastRecordNotFound'),'var(--red)');return;}
+  const hrs=type==='work'?calcHrs(start,end,brk):0;
+  const wage=getCompanyWage(company);
+  const extra=type==='work'?calcExtraAmount('edit'):{amount:0,task:null,qty:0};
+  const pay=calcPay(hrs,wage)+extra.amount;
+  entries[idx]={...entries[idx],start,end,brk,type,note,hrs,pay,company,shiftType,
+    extraTask:extra.task?extra.task.name:'',extraAmount:extra.amount,extraQty:extra.qty};
+  saveEntries(entries);
+  closeModal();
+  refreshAll();renderRecent();refreshCompanyList();
+  showToast(t('toastEdited'));
+}
+
+// ════════════════════════════════════════
+//  SETTINGS
+// ════════════════════════════════════════
+function renderSettings(){
+  const s=getSettings();
+  document.getElementById('hourlyWage').value=s.wage||'';
+  document.getElementById('workHours').value=s.workHours||8;
+  document.getElementById('dayShiftStart').value=s.dayShiftStart||'07:00';
+  document.getElementById('dayShiftEnd').value=s.dayShiftEnd||'16:00';
+  document.getElementById('nightShiftStart').value=s.nightShiftStart||'15:00';
+  document.getElementById('nightShiftEnd').value=s.nightShiftEnd||'23:30';
+  renderWeekdays();renderHolLists();renderCompanyNameSettingsList();renderExtraTaskSettingsList();
+}
+function saveSettings(){
+  saveSettingsDB({
+    wage:parseFloat(document.getElementById('hourlyWage').value)||0,
+    workHours:parseFloat(document.getElementById('workHours').value)||8,
+    dayShiftStart:document.getElementById('dayShiftStart').value||'07:00',
+    dayShiftEnd:document.getElementById('dayShiftEnd').value||'16:00',
+    nightShiftStart:document.getElementById('nightShiftStart').value||'15:00',
+    nightShiftEnd:document.getElementById('nightShiftEnd').value||'23:30',
+  });
+  updateCalc();updateHeaderStats();showToast(t('toastSettingsSaved'));
+}
+
+// ════════════════════════════════════════
+//  BACKUP / RESTORE
+// ════════════════════════════════════════
+function exportBackup(){
+  const data={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('wt_'))data[k]=localStorage.getItem(k);
+  }
+  const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),data},null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=(LANG==='ar'?'نسخة-احتياطية-ايام-عملي-':'Sicherung-Arbeitstage-')+fmtDate()+'.json';
+  link.click();
+  URL.revokeObjectURL(url);
+  showToast(t('backupDownloadedToast'));
+}
+function importBackup(file){
+  const fb=document.getElementById('backupFeedback');
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const parsed=JSON.parse(e.target.result);
+      const data=parsed&&parsed.data?parsed.data:parsed;
+      if(!data||typeof data!=='object')throw new Error('bad format');
+      if(!confirm(t('confirmRestoreBackup'))){
+        document.getElementById('restoreFile').value='';
+        return;
+      }
+      Object.keys(localStorage).filter(k=>k.startsWith('wt_')).forEach(k=>localStorage.removeItem(k));
+      Object.entries(data).forEach(([k,v])=>{if(k.startsWith('wt_'))localStorage.setItem(k,v);});
+      fb.style.display='none';
+      showToast(t('restoreSuccessToast'));
+      setTimeout(()=>location.reload(),700);
+    }catch(err){
+      fb.style.display='block';fb.style.color='var(--red)';
+      fb.textContent=t('restoreErrorMsg');
+    }
+  };
+  reader.readAsText(file);
+  document.getElementById('restoreFile').value='';
+}
+const WE=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function renderWeekdays(){
+  const off=getOffDays();
+  const WD=t('weekdaysFull');
+  document.getElementById('weekdaysToggle').innerHTML=WD.map((l,i)=>`
+    <div class="setting-row">
+      <div><div class="stitle">${l}</div><div class="sdesc">${WE[i]}</div></div>
+      <label class="toggle"><input type="checkbox" ${off.includes(i)?'':'checked'}
+        onchange="togWD(${i},this.checked)"><span class="slider"></span></label>
+    </div>`).join('');
+}
+function togWD(dow,isWork){
+  let off=getOffDays();
+  if(isWork)off=off.filter(d=>d!==dow);else if(!off.includes(dow))off.push(dow);
+  saveOffDays(off);
+}
+function renderHolLists(){
+  const y=new Date().getFullYear();
+  document.getElementById('fixedHolidayList').innerHTML=
+    gHols(y).map(h=>`<li><span>${h.name}</span><span style="color:var(--muted);font-size:0.74rem">${h.date}</span></li>`).join('');
+  const custom=getCustomHols();
+  document.getElementById('customHolidayList').innerHTML=!custom.length
+    ?`<li style="color:var(--muted);font-size:0.8rem;border:none">${t('noCustomHolidays')}</li>`
+    :custom.map((h,i)=>`<li><span>${h.name} <span style="color:var(--muted);font-size:0.72rem">(${h.date})</span></span>
+      <button class="del-btn" onclick="delHol(${i})">${t('deleteWord')}</button></li>`).join('');
+}
+function addCustomHoliday(){
+  const date=document.getElementById('customHolDate').value;
+  const name=document.getElementById('customHolName').value.trim();
+  if(!date||!name){showToast(t('toastEnterDateName'),'var(--yellow)');return;}
+  const h=getCustomHols();
+  if(h.some(x=>x.date===date)){showToast(t('toastDateExists'),'var(--yellow)');return;}
+  h.push({date,name});h.sort((a,b)=>a.date.localeCompare(b.date));saveCustomHols(h);
+  document.getElementById('customHolDate').value='';document.getElementById('customHolName').value='';
+  renderHolLists();showToast(t('toastHolidayAdded'));
+}
+function delHol(i){const h=getCustomHols();h.splice(i,1);saveCustomHols(h);renderHolLists();showToast(t('toastDeleted'),'var(--red)');}
+
+// ════════════════════════════════════════
+//  HEADER STATS
+// ════════════════════════════════════════
+function updateHeaderStats(){
+  const work=getEntries().filter(e=>e.type==='work');
+  document.getElementById('hDays').textContent=work.length;
+  document.getElementById('hHours').textContent=fmtHrsClock(work.reduce((s,e)=>s+e.hrs,0));
+  document.getElementById('hSalary').textContent=work.reduce((s,e)=>s+e.pay,0).toFixed(0)+'€';
+}
+
+// ════════════════════════════════════════
+//  PWA
+// ════════════════════════════════════════
+let dP=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();dP=e;
+  const b=document.getElementById('installBtn');b.style.animation='pulse 2s 3';
+});
+window.addEventListener('appinstalled',()=>{
+  document.getElementById('installBtn').style.display='none';showToast(t('toastInstalled'),'#4f46e5');dP=null;
+});
+function installApp(){
+  if(!dP){showInstGuide();return;}
+  dP.prompt();dP.userChoice.then(c=>{
+    if(c.outcome==='accepted')showToast(t('toastInstalling'),'#4f46e5');
+    dP=null;
+  });
+}
+function showInstGuide(){
+  const iOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const chr=/chrome/i.test(navigator.userAgent);
+  const msg=iOS?t('installIOS'):chr?t('installChrome'):t('installOther');
+  const ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;';
+  ov.innerHTML=`<div style="background:#1a2235;border:1px solid #2a3a55;border-radius:18px;padding:26px;max-width:380px;width:100%;text-align:center;direction:${LANG==='ar'?'rtl':'ltr'};">
+    <div style="font-size:2rem;margin-bottom:8px;">📲</div>
+    <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:10px;color:#f0f6ff;">${t('installTitle')}</h3>
+    <p style="font-size:0.83rem;color:#8ba3c7;line-height:1.7;margin-bottom:16px;">${msg}</p>
+    <button onclick="this.closest('div').parentElement.remove()"
+      style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:none;border-radius:9px;
+      padding:10px 22px;font-family:Cairo,sans-serif;font-size:0.86rem;font-weight:700;cursor:pointer;">${t('installGotIt')}</button>
+  </div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
+}
+if('serviceWorker'in navigator){
+  const sw=`const C='madi-v2';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
+}
+
+// ════════════════════════════════════════
+//  QUICK ADD TODAY
+// ════════════════════════════════════════
+function quickAddToday(){
+  const today = new Date().toISOString().slice(0,10);
+  const dow = new Date(today+'T12:00:00').getDay();
+  const off = getOffDays();
+  // check if already exists
+  const exists = getEntries().find(e=>e.date===today);
+  if(exists){
+    showToast(t('toastTodayAlready'),'var(--yellow)');
+    return;
+  }
+  // determine type
+  let type = 'work';
+  if(off.includes(dow)) type = 'weekly';
+  const start='07:00', end='16:00', brk=60;
+  const hrs = type==='work' ? calcHrs(start,end,brk) : 0;
+  const pay = calcPay(hrs);
+  const entries = getEntries();
+  entries.push({date:today,start,end,brk,type,note:'',hrs,pay});
+  entries.sort((a,b)=>a.date.localeCompare(b.date));
+  saveEntries(entries);
+  refreshAll(); renderRecent();
+  showToast(t('toastTodayAutoAdded'));
+}
+
+// ════════════════════════════════════════
+//  SALARY VISIBILITY TOGGLE
+// ════════════════════════════════════════
+let salaryHidden = DB.get('wt_sal_hidden', false);
+function toggleSalaryVis(){
+  salaryHidden = !salaryHidden;
+  DB.set('wt_sal_hidden', salaryHidden);
+  applySalaryVis();
+}
+function applySalaryVis(){
+  const daysCard = document.querySelector('#tab-days .card');
+  const btn = document.getElementById('toggleSalaryBtn');
+  if(!daysCard || !btn) return;
+  if(salaryHidden){
+    daysCard.classList.add('salary-hidden');
+    btn.textContent = '👁 '+t('showSalary');
+    btn.style.borderColor = 'var(--accent)';
+    btn.style.color = 'var(--accent2)';
+  } else {
+    daysCard.classList.remove('salary-hidden');
+    btn.textContent = '👁 '+t('hideSalary');
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+function init(){
+  if(!localStorage.getItem('wt_offdays'))saveOffDays([0,6]);
+  applyLangDOM();
+  fillToday();initMonthSel();initPrintMonthSel();initBulkPayMonthSel();renderRecent();updateHeaderStats();updateCalc();renderCommitments();refreshCompanyList();
+  const inD0=document.getElementById('inDate');if(inD0)inD0.value=fmtDate();
+  ['startTime','endTime','breakMin'].forEach(id=>document.getElementById(id).addEventListener('input',updateCalc));
+}
+init();
+</script>
+</body>
+</html>
