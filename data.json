@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "exportedAt": "2026-01-01T00:00:00.000Z",
+  "entries": [],
+  "settings": {
+    "wage": 0,
+    "workHours": 8,
+    "dayShiftStart": "07:00",
+    "dayShiftEnd": "16:00",
+    "nightShiftStart": "15:00",
+    "nightShiftEnd": "23:30"
+  },
+  "offDays": [
+    0,
+    6
+  ],
+  "customHolidays": [],
+  "companies": [],
+  "extraTasks": [],
+  "commitments": [],
+  "income": [],
+  "shifts": [],
+  "payments": {},
+  "other": {}
+}
