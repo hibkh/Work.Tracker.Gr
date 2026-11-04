@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-04T05:53:11.931Z",
+  "exportedAt": "2026-11-04T05:55:13.198Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -48,6 +48,17 @@
     },
     {
       "date": "2026-07-06",
+      "start": "07:00",
+      "end": "16:00",
+      "brk": 60,
+      "type": "work",
+      "note": "",
+      "hrs": 8,
+      "pay": 0,
+      "company": "معمل احذية 🌉"
+    },
+    {
+      "date": "2026-07-07",
       "start": "07:00",
       "end": "16:00",
       "brk": 60,
@@ -1014,14 +1025,44 @@
       "extraQty": 0
     },
     {
-      "date": "2026-11-04",
+      "date": "2026-10-29",
+      "start": "06:30",
+      "end": "17:30",
+      "brk": 30,
+      "type": "work",
+      "note": "Borgstedt",
+      "hrs": 10.5,
+      "pay": 202.5,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "day",
+      "extraTask": "Container 1-2",
+      "extraAmount": 45,
+      "extraQty": 1
+    },
+    {
+      "date": "2026-10-30",
       "start": "06:30",
       "end": "15:00",
       "brk": 30,
       "type": "work",
-      "note": "",
+      "note": "Borgstedt",
       "hrs": 8,
       "pay": 120,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "day",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0
+    },
+    {
+      "date": "2026-11-02",
+      "start": "06:30",
+      "end": "16:00",
+      "brk": 30,
+      "type": "work",
+      "note": "",
+      "hrs": 9,
+      "pay": 135,
       "company": "معمل لحوم 🐮🐑🌆",
       "shiftType": "day",
       "extraTask": "",
@@ -1176,6 +1217,12 @@
       "date": "2026-10-29",
       "amount": 45,
       "note": "Container"
+    },
+    {
+      "id": "mw0ce91w",
+      "date": "2026-10-12",
+      "amount": 45,
+      "note": "Container"
     }
   ],
   "shifts": [],
@@ -1244,13 +1291,13 @@
       "paid": true,
       "amount": 0
     },
-    "2026-09-30": {
-      "paid": true,
-      "amount": 120
-    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
+    },
+    "2026-09-30": {
+      "paid": true,
+      "amount": 120
     },
     "2026-08-21": {
       "paid": true,
@@ -1376,11 +1423,11 @@
       "paid": true,
       "amount": 120
     },
-    "2026-07-06": {
+    "2026-07-18": {
       "paid": true,
       "amount": 0
     },
-    "2026-07-18": {
+    "2026-07-06": {
       "paid": true,
       "amount": 0
     },
