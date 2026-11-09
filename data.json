@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-07T13:37:05.720Z",
+  "exportedAt": "2026-11-09T14:10:03.076Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1128,6 +1128,21 @@
       "extraTask": "",
       "extraAmount": 0,
       "extraQty": 0
+    },
+    {
+      "date": "2026-11-09",
+      "start": "06:30",
+      "end": "15:00",
+      "brk": 30,
+      "type": "work",
+      "note": "",
+      "hrs": 8,
+      "pay": 120,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "day",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0
     }
   ],
   "settings": {
@@ -1351,13 +1366,13 @@
       "paid": true,
       "amount": 0
     },
-    "2026-09-30": {
-      "paid": true,
-      "amount": 120
-    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
+    },
+    "2026-09-30": {
+      "paid": true,
+      "amount": 120
     },
     "2026-08-21": {
       "paid": true,
