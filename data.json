@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-10T10:26:14.606Z",
+  "exportedAt": "2026-11-10T10:26:45.775Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1143,6 +1143,21 @@
       "extraTask": "Container2",
       "extraAmount": 40,
       "extraQty": 1
+    },
+    {
+      "date": "2026-11-10",
+      "start": "06:30",
+      "end": "15:00",
+      "brk": 30,
+      "type": "work",
+      "note": "",
+      "hrs": 8,
+      "pay": 120,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "day",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0
     }
   ],
   "settings": {
