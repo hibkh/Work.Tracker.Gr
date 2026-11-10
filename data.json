@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-10T10:25:11.778Z",
+  "exportedAt": "2026-11-10T10:26:10.896Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1298,6 +1298,12 @@
       "date": "2026-10-12",
       "amount": 45,
       "note": "Container"
+    },
+    {
+      "id": "mwajo62o",
+      "date": "2026-11-10",
+      "amount": 40,
+      "note": "Container 1"
     }
   ],
   "shifts": [],
