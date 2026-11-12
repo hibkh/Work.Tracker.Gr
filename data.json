@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-11T07:14:01.719Z",
+  "exportedAt": "2026-11-12T15:18:07.807Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1173,6 +1173,21 @@
       "extraTask": "",
       "extraAmount": 0,
       "extraQty": 0
+    },
+    {
+      "date": "2026-11-12",
+      "start": "15:00",
+      "end": "23:30",
+      "brk": 30,
+      "type": "work",
+      "note": "",
+      "hrs": 8,
+      "pay": 120,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "night",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0
     }
   ],
   "settings": {
@@ -1354,6 +1369,10 @@
       "paid": true,
       "amount": 120
     },
+    "2026-09-14": {
+      "paid": true,
+      "amount": 195
+    },
     "2026-09-10": {
       "paid": true,
       "amount": 127.5
@@ -1365,10 +1384,6 @@
     "2026-08-26": {
       "paid": true,
       "amount": 120
-    },
-    "2026-09-14": {
-      "paid": true,
-      "amount": 195
     },
     "2026-08-07": {
       "paid": true,
@@ -1398,13 +1413,17 @@
       "paid": true,
       "amount": 120
     },
+    "2026-07-04": {
+      "paid": true,
+      "amount": 0
+    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
     },
-    "2026-07-04": {
+    "2026-09-30": {
       "paid": true,
-      "amount": 0
+      "amount": 120
     },
     "2026-08-21": {
       "paid": true,
@@ -1413,10 +1432,6 @@
     "2026-07-09": {
       "paid": true,
       "amount": 0
-    },
-    "2026-09-30": {
-      "paid": true,
-      "amount": 120
     },
     "2026-08-17": {
       "paid": true,
@@ -1534,11 +1549,11 @@
       "paid": true,
       "amount": 120
     },
-    "2026-07-18": {
+    "2026-07-06": {
       "paid": true,
       "amount": 0
     },
-    "2026-07-06": {
+    "2026-07-18": {
       "paid": true,
       "amount": 0
     },
