@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-12T15:18:07.807Z",
+  "exportedAt": "2026-11-13T15:24:04.587Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1185,6 +1185,21 @@
       "pay": 120,
       "company": "معمل لحوم 🐮🐑🌆",
       "shiftType": "night",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0
+    },
+    {
+      "date": "2026-11-13",
+      "start": "07:00",
+      "end": "16:00",
+      "brk": 40,
+      "type": "work",
+      "note": "",
+      "hrs": 8.33,
+      "pay": 124.95,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "shiftType": "day",
       "extraTask": "",
       "extraAmount": 0,
       "extraQty": 0
