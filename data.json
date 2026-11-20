@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:54:46.989Z",
+  "exportedAt": "2026-11-20T14:55:04.704Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1398,7 +1398,7 @@
       "hrs": 8,
       "pay": 120,
       "company": "معمل لحوم 🐮🐑🌆",
-      "branch": "",
+      "branch": "Brogstadt",
       "shiftType": "night",
       "extraTask": "",
       "extraAmount": 0,
