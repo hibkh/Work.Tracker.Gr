@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:30:48.538Z",
+  "exportedAt": "2026-11-20T15:31:04.413Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1404,12 +1404,12 @@
     {
       "date": "2026-11-18",
       "start": "06:30",
-      "end": "15:00",
+      "end": "16:10",
       "brk": 30,
       "type": "work",
       "note": "",
-      "hrs": 8,
-      "pay": 165,
+      "hrs": 9.17,
+      "pay": 182.55,
       "company": "معمل لحوم 🐮🐑🌆",
       "branch": "Boilingstadt",
       "shiftType": "day",
@@ -1427,7 +1427,7 @@
       ],
       "ctMode": "total",
       "ctHrs": 2.17,
-      "regHrs": 5.83
+      "regHrs": 7
     },
     {
       "date": "2026-11-20",
