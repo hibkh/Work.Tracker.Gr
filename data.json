@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:38:52.882Z",
+  "exportedAt": "2026-11-20T14:50:29.737Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1437,7 +1437,10 @@
       "wage": 15,
       "defStart": "06:30",
       "defEnd": "15:00",
-      "defBreak": 30
+      "defBreak": 30,
+      "branches": [
+        "Boilingstadt"
+      ]
     },
     {
       "name": "Borgstedt معمل لحوم",
