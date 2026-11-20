@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:55:19.556Z",
+  "exportedAt": "2026-11-20T14:55:28.388Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1335,7 +1335,7 @@
       "hrs": 8,
       "pay": 220,
       "company": "معمل لحوم 🐮🐑🌆",
-      "branch": "",
+      "branch": "Boilingstadt",
       "shiftType": "day",
       "extraTask": "Container 1-2 + Container 55",
       "extraAmount": 100,
