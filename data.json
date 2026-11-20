@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:51:37.278Z",
+  "exportedAt": "2026-11-20T14:52:16.785Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1368,20 +1368,20 @@
       "type": "work",
       "note": "",
       "hrs": 8,
-      "pay": 170,
+      "pay": 165,
       "company": "معمل لحوم 🐮🐑🌆",
       "branch": "",
       "shiftType": "day",
-      "extraTask": "Container 1",
-      "extraAmount": 50,
+      "extraTask": "Container 1-2",
+      "extraAmount": 45,
       "extraQty": 1,
       "containers": [
         {
           "from": "14:00",
           "to": "16:10",
-          "taskId": "msyrr34y",
-          "name": "Container 1",
-          "amount": 50
+          "taskId": "mt32se41",
+          "name": "Container 1-2",
+          "amount": 45
         }
       ],
       "ctMode": "total",
