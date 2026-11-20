@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:56:18.847Z",
+  "exportedAt": "2026-11-20T14:57:29.245Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1354,16 +1354,16 @@
           "amount": 45
         },
         {
-          "from": "13:50",
-          "to": "14:25",
+          "from": "13:25",
+          "to": "14:50",
           "taskId": "mwp31ir3",
           "name": "Container 55",
           "amount": 55
         }
       ],
       "ctMode": "total",
-      "ctHrs": 1.75,
-      "regHrs": 6.25
+      "ctHrs": 2.58,
+      "regHrs": 5.42
     },
     {
       "date": "2026-11-18",
