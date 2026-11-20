@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-13T15:24:04.587Z",
+  "exportedAt": "2026-11-20T14:15:31.885Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -212,7 +212,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container 01",
       "extraAmount": 72.5,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 01",
+          "qty": 1,
+          "amount": 72.5
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-08-06",
@@ -226,7 +237,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container 3",
       "extraAmount": 35,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 3",
+          "qty": 1,
+          "amount": 35
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 9
     },
     {
       "date": "2026-08-07",
@@ -240,7 +262,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container2",
       "extraAmount": 40,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container2",
+          "qty": 1,
+          "amount": 40
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-08-11",
@@ -282,7 +315,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container 5",
       "extraAmount": 20,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 5",
+          "qty": 1,
+          "amount": 20
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-08-17",
@@ -310,7 +354,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container 1",
       "extraAmount": 50,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 1",
+          "qty": 1,
+          "amount": 50
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-08-19",
@@ -338,7 +393,18 @@
       "company": "معمل لحوم 🐮🐑🌆",
       "extraTask": "Container 1-2",
       "extraAmount": 45,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 1-2",
+          "qty": 1,
+          "amount": 45
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 7.92
     },
     {
       "date": "2026-08-24",
@@ -572,7 +638,18 @@
       "shiftType": "day",
       "extraTask": "Container 75",
       "extraAmount": 75,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 75",
+          "qty": 1,
+          "amount": 75
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-09-15",
@@ -647,7 +724,18 @@
       "shiftType": "night",
       "extraTask": "Container 1-2",
       "extraAmount": 45,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 1-2",
+          "qty": 1,
+          "amount": 45
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-09-22",
@@ -857,7 +945,18 @@
       "shiftType": "night",
       "extraTask": "Container 1-2",
       "extraAmount": 45,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 1-2",
+          "qty": 1,
+          "amount": 45
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-10-13",
@@ -1037,7 +1136,18 @@
       "shiftType": "day",
       "extraTask": "Container 1-2",
       "extraAmount": 45,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container 1-2",
+          "qty": 1,
+          "amount": 45
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 10.5
     },
     {
       "date": "2026-10-30",
@@ -1142,7 +1252,18 @@
       "shiftType": "day",
       "extraTask": "Container2",
       "extraAmount": 40,
-      "extraQty": 1
+      "extraQty": 1,
+      "containers": [
+        {
+          "legacy": true,
+          "name": "Container2",
+          "qty": 1,
+          "amount": 40
+        }
+      ],
+      "ctMode": "total",
+      "ctHrs": 0,
+      "regHrs": 8
     },
     {
       "date": "2026-11-10",
@@ -1211,7 +1332,9 @@
     "dayShiftStart": "06:30",
     "dayShiftEnd": "15:00",
     "nightShiftStart": "15:00",
-    "nightShiftEnd": "23:30"
+    "nightShiftEnd": "23:30",
+    "meatSeeded": true,
+    "ctMigrated": true
   },
   "offDays": [
     0,
@@ -1225,6 +1348,17 @@
       "defStart": null,
       "defEnd": null,
       "defBreak": null
+    },
+    {
+      "name": "معمل اللحوم",
+      "wage": null,
+      "defStart": null,
+      "defEnd": null,
+      "defBreak": null,
+      "branches": [
+        "Brogstat"
+      ],
+      "seed": true
     },
     {
       "name": "معمل لحوم 🐮🐑🌆",
