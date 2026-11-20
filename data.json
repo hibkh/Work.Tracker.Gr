@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:37:21.841Z",
+  "exportedAt": "2026-11-20T14:37:24.507Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1411,14 +1411,6 @@
       "defStart": null,
       "defEnd": null,
       "defBreak": null
-    },
-    {
-      "name": "معمل اللحوم",
-      "wage": null,
-      "defStart": null,
-      "defEnd": null,
-      "defBreak": null,
-      "branches": []
     },
     {
       "name": "معمل لحوم 🐮🐑🌆",
