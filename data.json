@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:14:40.934Z",
+  "exportedAt": "2026-11-20T15:15:04.366Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1288,7 +1288,8 @@
       ],
       "ctMode": "total",
       "ctHrs": 0,
-      "regHrs": 8
+      "regHrs": 8,
+      "branch": "Boilingstadt"
     },
     {
       "date": "2026-11-10",
