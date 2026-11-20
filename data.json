@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:16:46.848Z",
+  "exportedAt": "2026-11-20T15:28:30.661Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1369,12 +1369,12 @@
     {
       "date": "2026-11-17",
       "start": "06:30",
-      "end": "15:00",
+      "end": "16:10",
       "brk": 30,
       "type": "work",
       "note": "",
-      "hrs": 8,
-      "pay": 220,
+      "hrs": 9.17,
+      "pay": 237.55,
       "company": "معمل لحوم 🐮🐑🌆",
       "branch": "Boilingstadt",
       "shiftType": "day",
@@ -1399,7 +1399,7 @@
       ],
       "ctMode": "total",
       "ctHrs": 2.58,
-      "regHrs": 5.42
+      "regHrs": 6.59
     },
     {
       "date": "2026-11-18",
@@ -1645,10 +1645,6 @@
       "paid": true,
       "amount": 120
     },
-    "2026-09-14": {
-      "paid": true,
-      "amount": 195
-    },
     "2026-10-30": {
       "paid": true,
       "amount": 120
@@ -1665,13 +1661,13 @@
       "paid": true,
       "amount": 120
     },
-    "2026-10-06": {
-      "paid": true,
-      "amount": 120
-    },
     "2026-10-14": {
       "paid": true,
       "amount": 120
+    },
+    "2026-09-14": {
+      "paid": true,
+      "amount": 195
     },
     "2026-10-26": {
       "paid": true,
@@ -1680,6 +1676,10 @@
     "2026-11-09": {
       "paid": false,
       "amount": 0
+    },
+    "2026-10-06": {
+      "paid": true,
+      "amount": 120
     },
     "2026-10-29": {
       "paid": true,
@@ -1741,17 +1741,13 @@
       "paid": true,
       "amount": 120
     },
-    "2026-07-04": {
-      "paid": true,
-      "amount": 0
-    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
     },
-    "2026-09-30": {
+    "2026-07-04": {
       "paid": true,
-      "amount": 120
+      "amount": 0
     },
     "2026-08-21": {
       "paid": true,
@@ -1760,6 +1756,10 @@
     "2026-07-09": {
       "paid": true,
       "amount": 0
+    },
+    "2026-09-30": {
+      "paid": true,
+      "amount": 120
     },
     "2026-10-08": {
       "paid": true,
