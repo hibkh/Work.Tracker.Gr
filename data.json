@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:55:37.705Z",
+  "exportedAt": "2026-11-20T14:56:18.847Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1601,7 +1601,15 @@
       "paid": true,
       "amount": 120
     },
+    "2026-10-07": {
+      "paid": true,
+      "amount": 120
+    },
     "2026-09-04": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-30": {
       "paid": true,
       "amount": 120
     },
@@ -1617,15 +1625,39 @@
       "paid": true,
       "amount": 120
     },
+    "2026-10-06": {
+      "paid": true,
+      "amount": 120
+    },
     "2026-09-14": {
       "paid": true,
       "amount": 195
+    },
+    "2026-10-26": {
+      "paid": true,
+      "amount": 118.8
+    },
+    "2026-10-14": {
+      "paid": true,
+      "amount": 120
     },
     "2026-08-07": {
       "paid": true,
       "amount": 160
     },
     "2026-09-09": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-19": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-29": {
+      "paid": true,
+      "amount": 202.5
+    },
+    "2026-10-21": {
       "paid": true,
       "amount": 120
     },
@@ -1644,6 +1676,22 @@
     "2026-08-14": {
       "paid": true,
       "amount": 140
+    },
+    "2026-10-13": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-05": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-22": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-23": {
+      "paid": true,
+      "amount": 120
     },
     "2026-09-18": {
       "paid": true,
@@ -1669,6 +1717,10 @@
       "paid": true,
       "amount": 120
     },
+    "2026-10-08": {
+      "paid": true,
+      "amount": 120
+    },
     "2026-08-17": {
       "paid": true,
       "amount": 123.75
@@ -1676,6 +1728,10 @@
     "2026-08-06": {
       "paid": true,
       "amount": 170
+    },
+    "2026-10-12": {
+      "paid": true,
+      "amount": 165
     },
     "2026-08-31": {
       "paid": true,
@@ -1701,6 +1757,10 @@
       "paid": true,
       "amount": 120
     },
+    "2026-10-16": {
+      "paid": true,
+      "amount": 88.8
+    },
     "2026-09-16": {
       "paid": true,
       "amount": 120
@@ -1708,6 +1768,10 @@
     "2026-07-07": {
       "paid": true,
       "amount": 0
+    },
+    "2026-10-27": {
+      "paid": true,
+      "amount": 120
     },
     "2026-07-14": {
       "paid": true,
@@ -1722,6 +1786,10 @@
       "amount": 120
     },
     "2026-09-08": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-02": {
       "paid": true,
       "amount": 120
     },
@@ -1765,11 +1833,23 @@
       "paid": true,
       "amount": 120
     },
+    "2026-10-20": {
+      "paid": true,
+      "amount": 67.5
+    },
     "2026-07-21": {
       "paid": true,
       "amount": 0
     },
+    "2026-10-01": {
+      "paid": true,
+      "amount": 120
+    },
     "2026-09-28": {
+      "paid": true,
+      "amount": 120
+    },
+    "2026-10-09": {
       "paid": true,
       "amount": 120
     },
@@ -1788,6 +1868,10 @@
     "2026-07-06": {
       "paid": true,
       "amount": 0
+    },
+    "2026-10-15": {
+      "paid": true,
+      "amount": 120
     },
     "2026-07-18": {
       "paid": true,
