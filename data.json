@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:13:00.721Z",
+  "exportedAt": "2026-11-20T15:13:18.782Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1177,7 +1177,12 @@
       "shiftType": "day",
       "extraTask": "",
       "extraAmount": 0,
-      "extraQty": 0
+      "extraQty": 0,
+      "branch": "Brogstadt",
+      "containers": [],
+      "ctMode": "",
+      "ctHrs": 0,
+      "regHrs": 9
     },
     {
       "date": "2026-11-03",
