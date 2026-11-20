@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:31:04.413Z",
+  "exportedAt": "2026-11-20T18:15:31.069Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1458,7 +1458,8 @@
     "nightShiftStart": "15:00",
     "nightShiftEnd": "23:30",
     "meatSeeded": true,
-    "ctMigrated": true
+    "ctMigrated": true,
+    "defaultCompany": "معمل لحوم 🐮🐑🌆"
   },
   "offDays": [
     0,
@@ -1482,7 +1483,8 @@
       "branches": [
         "Boilingstadt",
         "Brogstadt"
-      ]
+      ],
+      "defBranch": "Boilingstadt"
     },
     {
       "name": "Borgstedt معمل لحوم",
@@ -1645,6 +1647,10 @@
       "paid": true,
       "amount": 120
     },
+    "2026-09-14": {
+      "paid": true,
+      "amount": 195
+    },
     "2026-10-30": {
       "paid": true,
       "amount": 120
@@ -1661,13 +1667,13 @@
       "paid": true,
       "amount": 120
     },
-    "2026-10-14": {
+    "2026-10-06": {
       "paid": true,
       "amount": 120
     },
-    "2026-09-14": {
+    "2026-10-14": {
       "paid": true,
-      "amount": 195
+      "amount": 120
     },
     "2026-10-26": {
       "paid": true,
@@ -1676,10 +1682,6 @@
     "2026-11-09": {
       "paid": false,
       "amount": 0
-    },
-    "2026-10-06": {
-      "paid": true,
-      "amount": 120
     },
     "2026-10-29": {
       "paid": true,
@@ -1741,13 +1743,17 @@
       "paid": true,
       "amount": 120
     },
+    "2026-07-04": {
+      "paid": true,
+      "amount": 0
+    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
     },
-    "2026-07-04": {
+    "2026-09-30": {
       "paid": true,
-      "amount": 0
+      "amount": 120
     },
     "2026-08-21": {
       "paid": true,
@@ -1756,10 +1762,6 @@
     "2026-07-09": {
       "paid": true,
       "amount": 0
-    },
-    "2026-09-30": {
-      "paid": true,
-      "amount": 120
     },
     "2026-10-08": {
       "paid": true,
