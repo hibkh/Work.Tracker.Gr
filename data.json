@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:09:58.965Z",
+  "exportedAt": "2026-11-20T15:10:03.056Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1642,8 +1642,8 @@
       "amount": 118.8
     },
     "2026-11-09": {
-      "paid": true,
-      "amount": 160
+      "paid": false,
+      "amount": 0
     },
     "2026-10-29": {
       "paid": true,
