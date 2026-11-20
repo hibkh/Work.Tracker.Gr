@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:14:01.614Z",
+  "exportedAt": "2026-11-20T15:14:19.782Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1217,7 +1217,12 @@
       "shiftType": "day",
       "extraTask": "",
       "extraAmount": 0,
-      "extraQty": 0
+      "extraQty": 0,
+      "branch": "Boilingstadt",
+      "containers": [],
+      "ctMode": "",
+      "ctHrs": 0,
+      "regHrs": 10
     },
     {
       "date": "2026-11-05",
