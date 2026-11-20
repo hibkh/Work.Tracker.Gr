@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:29:33.429Z",
+  "exportedAt": "2026-11-20T14:36:50.607Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1486,6 +1486,12 @@
       "name": "Container 75",
       "amount": 75,
       "company": "معمل لحوم 🐮🐑🌆"
+    },
+    {
+      "id": "mwp31ir3",
+      "name": "Container 55",
+      "amount": 55,
+      "company": "معمل لحوم 🐮🐑🌆"
     }
   ],
   "commitments": [],
@@ -1581,10 +1587,6 @@
       "paid": true,
       "amount": 120
     },
-    "2026-09-14": {
-      "paid": true,
-      "amount": 195
-    },
     "2026-09-10": {
       "paid": true,
       "amount": 127.5
@@ -1596,6 +1598,10 @@
     "2026-08-26": {
       "paid": true,
       "amount": 120
+    },
+    "2026-09-14": {
+      "paid": true,
+      "amount": 195
     },
     "2026-08-07": {
       "paid": true,
@@ -1625,17 +1631,13 @@
       "paid": true,
       "amount": 120
     },
-    "2026-07-04": {
-      "paid": true,
-      "amount": 0
-    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
     },
-    "2026-09-30": {
+    "2026-07-04": {
       "paid": true,
-      "amount": 120
+      "amount": 0
     },
     "2026-08-21": {
       "paid": true,
@@ -1644,6 +1646,10 @@
     "2026-07-09": {
       "paid": true,
       "amount": 0
+    },
+    "2026-09-30": {
+      "paid": true,
+      "amount": 120
     },
     "2026-08-17": {
       "paid": true,
