@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:36:50.607Z",
+  "exportedAt": "2026-11-20T14:37:21.841Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1418,10 +1418,7 @@
       "defStart": null,
       "defEnd": null,
       "defBreak": null,
-      "branches": [
-        "Brogstat"
-      ],
-      "seed": true
+      "branches": []
     },
     {
       "name": "معمل لحوم 🐮🐑🌆",
