@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:50:29.737Z",
+  "exportedAt": "2026-11-20T14:50:51.428Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1439,7 +1439,8 @@
       "defEnd": "15:00",
       "defBreak": 30,
       "branches": [
-        "Boilingstadt"
+        "Boilingstadt",
+        "Brogstadt"
       ]
     },
     {
