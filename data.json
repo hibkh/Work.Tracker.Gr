@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T15:02:13.790Z",
+  "exportedAt": "2026-11-20T15:09:58.965Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1609,6 +1609,10 @@
       "paid": true,
       "amount": 120
     },
+    "2026-09-14": {
+      "paid": true,
+      "amount": 195
+    },
     "2026-10-30": {
       "paid": true,
       "amount": 120
@@ -1625,13 +1629,13 @@
       "paid": true,
       "amount": 120
     },
-    "2026-10-14": {
+    "2026-10-06": {
       "paid": true,
       "amount": 120
     },
-    "2026-09-14": {
+    "2026-10-14": {
       "paid": true,
-      "amount": 195
+      "amount": 120
     },
     "2026-10-26": {
       "paid": true,
@@ -1640,10 +1644,6 @@
     "2026-11-09": {
       "paid": true,
       "amount": 160
-    },
-    "2026-10-06": {
-      "paid": true,
-      "amount": 120
     },
     "2026-10-29": {
       "paid": true,
@@ -1654,8 +1654,8 @@
       "amount": 160
     },
     "2026-11-06": {
-      "paid": true,
-      "amount": 120
+      "paid": false,
+      "amount": 0
     },
     "2026-09-09": {
       "paid": true,
@@ -1705,13 +1705,17 @@
       "paid": true,
       "amount": 120
     },
+    "2026-07-04": {
+      "paid": true,
+      "amount": 0
+    },
     "2026-07-02": {
       "paid": true,
       "amount": 0
     },
-    "2026-07-04": {
+    "2026-09-30": {
       "paid": true,
-      "amount": 0
+      "amount": 120
     },
     "2026-08-21": {
       "paid": true,
@@ -1720,10 +1724,6 @@
     "2026-07-09": {
       "paid": true,
       "amount": 0
-    },
-    "2026-09-30": {
-      "paid": true,
-      "amount": 120
     },
     "2026-10-08": {
       "paid": true,
