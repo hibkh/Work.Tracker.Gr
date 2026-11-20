@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-20T14:52:16.785Z",
+  "exportedAt": "2026-11-20T14:54:46.989Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1342,14 +1342,14 @@
       "extraQty": 1,
       "containers": [
         {
-          "from": "12:10",
+          "from": "12:00",
           "to": "13:10",
           "taskId": "mt32se41",
           "name": "Container 1-2",
           "amount": 45
         },
         {
-          "from": "13:25",
+          "from": "13:50",
           "to": "14:25",
           "taskId": "mwp31ir3",
           "name": "Container 55",
@@ -1357,8 +1357,8 @@
         }
       ],
       "ctMode": "total",
-      "ctHrs": 2,
-      "regHrs": 6
+      "ctHrs": 1.75,
+      "regHrs": 6.25
     },
     {
       "date": "2026-11-18",
