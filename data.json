@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-11-25T13:31:05.961Z",
+  "exportedAt": "2026-11-28T08:50:06.948Z",
   "entries": [
     {
       "date": "2026-07-01",
@@ -1491,6 +1491,26 @@
     },
     {
       "date": "2026-11-25",
+      "start": "15:00",
+      "end": "23:30",
+      "brk": 30,
+      "type": "work",
+      "note": "",
+      "hrs": 8,
+      "pay": 120,
+      "company": "معمل لحوم 🐮🐑🌆",
+      "branch": "Brogstadt",
+      "shiftType": "night",
+      "extraTask": "",
+      "extraAmount": 0,
+      "extraQty": 0,
+      "containers": [],
+      "ctMode": "",
+      "ctHrs": 0,
+      "regHrs": 8
+    },
+    {
+      "date": "2026-11-26",
       "start": "15:00",
       "end": "23:30",
       "brk": 30,
